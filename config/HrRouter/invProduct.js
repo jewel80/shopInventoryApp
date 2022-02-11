@@ -7,6 +7,7 @@ const pdf = require('html-pdf');
 const multer = require('multer');
 const xlsx = require('xlsx');
 const excel = require('exceljs');
+const { setTimeout } = require('timers');
 const upload = multer({
     dest: 'public/uploads/'
 });
@@ -85,7 +86,7 @@ global.footerContents = function() {
 function routerInit(app, dbFull) {
     var db = dbFull.HR_DB
 
-    app.get('/getInvProductList', function(req, res) {
+    app.get('/getInvProductList', (req, res) => {
         res.setHeader('Content-Type', 'application/json');
         var QUERY = (req.query) ? req.query : {};
         var SEARCH = {};
@@ -98,6 +99,7 @@ function routerInit(app, dbFull) {
                 }
             };
         }
+        
         if (QUERY.item_code) {
             SEARCH = {
                 item_code: {

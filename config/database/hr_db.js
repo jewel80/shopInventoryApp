@@ -1,10 +1,7 @@
 function init(sequelize) {
-    /////*******************#####  RIPS MODELER FILE INCLUDING STARTS  *#####****************/////
+    /////*******************#####   MODELER FILE INCLUDING STARTS  *#####****************/////
 
     this.user = require(__dirname + '/HrModel/user.js')(sequelize);
-
-    this.floor = require(__dirname + '/HrModel/floor.js')(sequelize);
-    this.kyc_archive = require(__dirname + '/HrModel/kyc_archive.js')(sequelize);
     this.role = require(__dirname + '/HrModel/role.js')(sequelize);
     this.navigation = require(__dirname + '/HrModel/navigation.js')(sequelize);
     this.user_navigation = require(__dirname + '/HrModel/user_navigation.js')(sequelize);
@@ -12,13 +9,13 @@ function init(sequelize) {
 
     this.product_type = require(__dirname + '/HrModel/product_type.js')(sequelize);
     this.inv_product = require(__dirname + '/HrModel/inv_product.js')(sequelize);
-    this.daily_sell = require(__dirname + '/HrModel/daily_sell.js')(sequelize);
-    this.accounts = require(__dirname + '/HrModel/accounts.js')(sequelize);
+    this.sales = require(__dirname + '/HrModel/sales.js')(sequelize);
+    this.expence = require(__dirname + '/HrModel/expence.js')(sequelize);
 
-    /////*******************#####  RIPS MODELER FILE INCLUDING ENDS  #####****************/////
+    /////*******************#####   MODELER FILE INCLUDING ENDS  #####****************/////
 
 
-    ////////////////%%%%#####  RIPS TABLE RELATIONSHIP STARTS  #####%%%%////////////////////
+    ////////////////%%%%#####   TABLE RELATIONSHIP STARTS  #####%%%%////////////////////
 
     /*=========================================================================================================
     =========================================================================================================
@@ -44,14 +41,14 @@ function init(sequelize) {
     this.inv_product.belongsTo(this.product_type, {
         foreignKey: 'product_type'
     });
-    this.daily_sell.belongsTo(this.inv_product, {
-        foreignKey: 'item_code'
+    this.sales.belongsTo(this.inv_product, {
+        foreignKey: 'products'
     });
 
 
-    ////////////////%%%%#####  RIPS TABLE RELATIONSHIP ENDS  #####%%%%////////////////////
+    ////////////////%%%%#####   TABLE RELATIONSHIP ENDS  #####%%%%////////////////////
     sequelize.sync({
-        force: true
+        force: false
     }).then(function(d) {
         if (!d) {
             console.log('An error occurred while creating the table:', d)
