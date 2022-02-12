@@ -67,142 +67,144 @@ function salesProductGrid(UN) {
         },
         tbar: [
 
-        /*Ext.create('Ext.form.field.ComboBox', {
-            name: 'product_type',
-            id: 'inv_product_type_search',
-            editable: false,
-            emptyText: 'Search By Category...',
-            queryMode: 'local',
-            displayField: 'name',
-            valueField: 'id',
-            padding: 5,
-            store: {
-                fields: ['id', 'name'],
-                pageSize: 0,
-                limit: 0,
-                proxy: {
-                    type: 'ajax',
-                    url: '/getProductTypeList',
-                    reader: {
-                        root: 'rows'
-                    }
+            /*Ext.create('Ext.form.field.ComboBox', {
+                name: 'product_type',
+                id: 'inv_product_type_search',
+                editable: false,
+                emptyText: 'Search By Category...',
+                queryMode: 'local',
+                displayField: 'name',
+                valueField: 'id',
+                padding: 5,
+                store: {
+                    fields: ['id', 'name'],
+                    pageSize: 0,
+                    limit: 0,
+                    proxy: {
+                        type: 'ajax',
+                        url: '/getProductTypeList',
+                        reader: {
+                            root: 'rows'
+                        }
+                    },
+                    autoLoad: true,
+                    autoSync: true
                 },
-                autoLoad: true,
-                autoSync: true
-            },
-            listeners: {
-                change: {
-                    fn: function(field, value) {
-                        sales_product_grid.paramsReload({
-                            product_type: value
-                        });
+                listeners: {
+                    change: {
+                        fn: function(field, value) {
+                            sales_product_grid.paramsReload({
+                                product_type: value
+                            });
+                        }
                     }
                 }
-            }
-        }), Ext.create('Ext.form.field.Text', {
-            name: 'item_name',
-            id: 'inv_item_name_search',
-            emptyText: 'Search By Item Name...',
-            padding: 5,
-            listeners: {
-                change: {
-                    fn: function(field, value) {
-                        sales_product_grid.paramsReload({
-                            item_name: value
-                        });
+            }), Ext.create('Ext.form.field.Text', {
+                name: 'item_name',
+                id: 'inv_item_name_search',
+                emptyText: 'Search By Item Name...',
+                padding: 5,
+                listeners: {
+                    change: {
+                        fn: function(field, value) {
+                            sales_product_grid.paramsReload({
+                                item_name: value
+                            });
+                        }
                     }
                 }
-            }
-        }), Ext.create('Ext.form.field.Text', {
-            name: 'item_code',
-            id: 'inv_item_code_search',
-            emptyText: 'Search By Item Code...',
-            padding: 5,
-            listeners: {
-                change: {
-                    fn: function(field, value) {
-                        sales_product_grid.paramsReload({
-                            item_code: value
-                        });
+            }), Ext.create('Ext.form.field.Text', {
+                name: 'item_code',
+                id: 'inv_item_code_search',
+                emptyText: 'Search By Item Code...',
+                padding: 5,
+                listeners: {
+                    change: {
+                        fn: function(field, value) {
+                            sales_product_grid.paramsReload({
+                                item_code: value
+                            });
+                        }
                     }
                 }
-            }
-        }), Ext.create('Ext.form.field.Date', {
-            id: 'inv_start_date_search',
-            name: 'from_date',
-            padding: 5,
-            emptyText: 'Select From Date...',
-            listeners: {
-                change: {
-                    fn: function(combo, value) {
-                        sales_product_grid.paramsReload({
-                            from_date: value
-                        });
+            }), Ext.create('Ext.form.field.Date', {
+                id: 'inv_start_date_search',
+                name: 'from_date',
+                padding: 5,
+                emptyText: 'Select From Date...',
+                listeners: {
+                    change: {
+                        fn: function(combo, value) {
+                            sales_product_grid.paramsReload({
+                                from_date: value
+                            });
+                        }
                     }
                 }
-            }
-        }), Ext.create('Ext.form.field.Date', {
-            id: 'inv_end_date_search',
-            name: 'to_date',
-            padding: 5,
-            emptyText: 'Select To Date...',
-            listeners: {
-                change: {
-                    fn: function(combo, value) {
-                        sales_product_grid.paramsReload({
-                            to_date: value
-                        });
+            }), Ext.create('Ext.form.field.Date', {
+                id: 'inv_end_date_search',
+                name: 'to_date',
+                padding: 5,
+                emptyText: 'Select To Date...',
+                listeners: {
+                    change: {
+                        fn: function(combo, value) {
+                            sales_product_grid.paramsReload({
+                                to_date: value
+                            });
+                        }
                     }
                 }
-            }
-        }), {
-            xtype: 'button',
-            icon: '/public/icons/clear.png',
-            tooltip: 'Clear The Search Boxes',
-            border: 1,
-            style: {
-                borderColor: 'blue',
-                borderStyle: 'solid'
-            },
-            handler: function() {
-                Ext.getCmp('inv_product_type_search').setValue(undefined);
-                Ext.getCmp('inv_item_name_search').setValue(undefined);
-                Ext.getCmp('inv_item_code_search').setValue(undefined);
-                Ext.getCmp('inv_start_date_search').setValue(undefined);
-                Ext.getCmp('inv_end_date_search').setValue(undefined);
-                Ext.getCmp('sales_product_grid').getStore().load();
-            }
-        }, */
+            }), {
+                xtype: 'button',
+                icon: '/public/icons/clear.png',
+                tooltip: 'Clear The Search Boxes',
+                border: 1,
+                style: {
+                    borderColor: 'blue',
+                    borderStyle: 'solid'
+                },
+                handler: function() {
+                    Ext.getCmp('inv_product_type_search').setValue(undefined);
+                    Ext.getCmp('inv_item_name_search').setValue(undefined);
+                    Ext.getCmp('inv_item_code_search').setValue(undefined);
+                    Ext.getCmp('inv_start_date_search').setValue(undefined);
+                    Ext.getCmp('inv_end_date_search').setValue(undefined);
+                    Ext.getCmp('sales_product_grid').getStore().load();
+                }
+            }, */
 
-        {
-            xtype: 'button',
-            icon: '/public/icons/create.png',
-            tooltip: 'Add New BOX Archive',
-            hidden: (UN.role < 2) ? true : false,
-            border: 1,
-            style: {
-                borderColor: 'blue',
-                borderStyle: 'solid'
+            {
+                xtype: 'button',
+                icon: '/public/icons/create.png',
+                tooltip: 'Add New BOX Archive',
+                hidden: (UN.role < 2) ? true : false,
+                border: 1,
+                style: {
+                    borderColor: 'blue',
+                    borderStyle: 'solid'
+                },
+                handler: function() {
+                    SalesProductFormWindow();
+                }
+            }, {
+                xtype: 'button',
+                icon: '/public/icons/refresh.png',
+                tooltip: 'Reload',
+                style: {
+                    borderColor: 'blue',
+                    borderStyle: 'solid'
+                },
+                handler: function() {
+                    Ext.getCmp('sales_product_grid').paramsReload();
+                }
             },
-            handler: function() {
-                SalesProductFormWindow();
-            }
-        }, {
-            xtype: 'button',
-            icon: '/public/icons/refresh.png',
-            tooltip: 'Reload',
-            style: {
-                borderColor: 'blue',
-                borderStyle: 'solid'
-            },
-            handler: function() {
-                Ext.getCmp('sales_product_grid').paramsReload();
-            }
-        }, gridPaging],
+            gridPaging
+        ],
         // }, gridPaging],
         columns: [Ext.create('Ext.grid.RowNumberer', {
             width: 50
-        }),  {
+        }), {
             header: 'ITEM NAME',
             dataIndex: 'item_name',
             align: 'left',
@@ -300,7 +302,7 @@ function salesProductGrid(UN) {
                         self.editor = false;
                 }
             },
-        } ],
+        }],
         selModel: 'cellmodel',
         plugins: [Ext.create('Ext.grid.plugin.CellEditing', {
             clicksToEdit: 2,
@@ -312,8 +314,9 @@ function salesProductGrid(UN) {
 }
 
 function SalesProductFormWindow() {
+    var depID = 1;
     return Ext.create('Ext.window.Window', {
-        title: 'Add New Inventory Product',
+        title: 'Add New Sales Product',
         modal: true,
         id: 'SalesProductFormWindow',
         layout: 'fit',
@@ -385,45 +388,95 @@ function SalesProductFormWindow() {
                                         },
                                         autoLoad: true,
                                         autoSync: true
+                                    },
+                                    listeners: {
+                                        blur: function(self, The, eOpts) {
+                                            if (self.value) {
+                                                depID = self.value;
+                                                Ext.getCmp("userInputFormProductItemCodeField").setDisabled(false);
+                                                Ext.getCmp("userInputFormProductItemCodeField").getStore().setProxy({
+                                                    type: 'ajax',
+                                                    url: '/singleProductInventory/' + depID
+                                                }).load();
+                                            }
+                                        }
                                     }
-                                }, {
-                                    xtype: 'button',
-                                    icon: '/public/icons/create.png',
-                                    tooltip: 'Add New Product Type',
-                                    border: 1,
-                                    handler: function() {
-                                        productTypeFormWindow();
-                                    }
+
                                 }]
-                            }, {
+                            },
+
+                            {
+                                layout: 'hbox',
+                                border: false,
+                                align: 'stretch',
+                                bodyStyle: 'padding-bottom: 7px;',
+                                items: [{
+                                    xtype: 'combo',
+                                    name: 'product_item_code',
+                                    fieldLabel: 'Product Code',
+                                    id: 'userInputFormProductItemCodeField',
+                                    width: 300,
+                                    labelWidth: 90,
+                                    anyMatch: true,
+                                    typeAhead: true,
+                                    transform: 'stateSelect',
+                                    forceSelection: true,
+                                    disabled: true,
+                                    allowBlank: false,
+                                    editable: true,
+                                    labelAlign: 'left',
+                                    labelSeparator: '',
+                                    emptyText: 'Select Product Item Code...',
+                                    labelClsExtra: 'some-class',
+                                    fieldStyle: 'text-align: left;font-size: 12px;',
+                                    autoScroll: true,
+                                    queryMode: 'local',
+                                    displayField: 'item_code',
+                                    valueField: 'id',
+                                    selectOnFocus: true,
+                                    triggerAction: 'all',
+                                    store: {
+                                        fields: ['id', 'item_code'],
+                                        pageSize: 0,
+                                        limit: 0,
+                                        proxy: {
+                                            type: 'ajax',
+                                            url: '/singleProductInventory' + depID,
+                                            reader: {
+                                                root: 'rows'
+                                            }
+                                        },
+                                        autoLoad: true,
+                                        autoSync: true
+                                    },
+                                    listeners: {
+                                        // blur: function(self, The, eOpts) {
+                                        change: function(combo, newValue, oldValue) {
+                                            var item_name = combo.getSelection().data.item_name;
+                                            console.log(item_name)
+                                            if (Ext.getCmp("userInputFormFingerPrintIDField").getValue() == 0)
+                                                Ext.getCmp("userInputFormFingerPrintIDField").setValue(item_name);
+                                        }
+                                    }
+
+                                }]
+                            },
+
+                            {
                                 xtype: 'textfield',
+                                id: 'userInputFormFingerPrintIDField',
                                 name: 'item_name',
                                 fieldLabel: ' Item Name',
                                 filedAlign: 'top',
                                 allowBlank: false,
                                 width: 300,
+                                disabled: true,
                                 labelWidth: 90,
                                 minValue: 0,
                                 labelAlign: 'left',
                                 labelStyle: 'text-align:left;border solid 1px white;',
                                 labelSeparator: '',
                                 emptyText: 'Give Item Name...',
-                                labelClsExtra: 'some-class',
-                                fieldStyle: 'text-align: left;font-size: 12px;',
-                                autoScroll: true
-                            }, {
-                                xtype: 'textfield',
-                                name: 'item_code',
-                                fieldLabel: ' Item Code',
-                                filedAlign: 'top',
-                                allowBlank: false,
-                                width: 300,
-                                labelWidth: 90,
-                                minValue: 0,
-                                labelAlign: 'left',
-                                labelStyle: 'text-align:left;border solid 1px white;',
-                                labelSeparator: '',
-                                emptyText: 'Give Item Code...',
                                 labelClsExtra: 'some-class',
                                 fieldStyle: 'text-align: left;font-size: 12px;',
                                 autoScroll: true
@@ -459,7 +512,8 @@ function SalesProductFormWindow() {
                                 labelClsExtra: 'some-class',
                                 fieldStyle: 'text-align: left;font-size: 12px;',
                                 autoScroll: true
-                            }]
+                            }
+                        ]
                     }, {
                         border: false,
                         margin: '0 0 0 15',
@@ -469,86 +523,86 @@ function SalesProductFormWindow() {
                             align: 'stretch'
                         },
                         items: [{
-                                xtype: 'numberfield',
-                                name: 'selling_price',
-                                fieldLabel: 'Selling Price',
-                                filedAlign: 'top',
-                                allowBlank: false,
-                                width: 300,
-                                labelWidth: 80,
-                                minValue: 0,
-                                labelAlign: 'left',
-                                labelStyle: 'text-align:left;border solid 1px white;',
-                                labelSeparator: '',
-                                emptyText: 'Give Selling Price...',
-                                labelClsExtra: 'some-class',
-                                fieldStyle: 'text-align: left;font-size: 12px;',
-                                autoScroll: true
-                            }, {
-                                xtype: 'numberfield',
-                                name: 'sold_quantity',
-                                fieldLabel: 'Sold Qty.',
-                                filedAlign: 'top',
-                                allowBlank: false,
-                                width: 300,
-                                labelWidth: 80,
-                                minValue: 0,
-                                labelAlign: 'left',
-                                labelStyle: 'text-align:left;border solid 1px white;',
-                                labelSeparator: '',
-                                emptyText: 'Give Sold Quantity...',
-                                labelClsExtra: 'some-class',
-                                fieldStyle: 'text-align: left;font-size: 12px;',
-                                autoScroll: true
-                            }, {
-                                xtype: 'numberfield',
-                                name: 'discount',
-                                fieldLabel: 'Discount',
-                                filedAlign: 'top',
-                                allowBlank: true,
-                                width: 300,
-                                labelWidth: 80,
-                                minValue: 0,
-                                labelAlign: 'left',
-                                labelStyle: 'text-align:left;border solid 1px white;',
-                                labelSeparator: '',
-                                emptyText: 'Give Discount...',
-                                labelClsExtra: 'some-class',
-                                fieldStyle: 'text-align: left;font-size: 12px;',
-                                autoScroll: true
-                            }, {
-                                xtype: 'datefield',
-                                name: 'in_date',
-                                fieldLabel: 'Date',
-                                filedAlign: 'top',
-                                allowBlank: true,
-                                width: 300,
-                                labelWidth: 80,
-                                minValue: 0,
-                                labelAlign: 'left',
-                                labelStyle: 'text-align:left;border solid 1px white;',
-                                labelSeparator: '',
-                                emptyText: 'Give Date...',
-                                labelClsExtra: 'some-class',
-                                fieldStyle: 'text-align: left;font-size: 12px;',
-                                autoScroll: true
-                            }, {
-                                xtype: 'textfield',
-                                name: 'remark',
-                                fieldLabel: 'Remark',
-                                filedAlign: 'top',
-                                allowBlank: true,
-                                width: 300,
-                                labelWidth: 80,
-                                minValue: 0,
-                                labelAlign: 'left',
-                                labelStyle: 'text-align:left;border solid 1px white;',
-                                labelSeparator: '',
-                                emptyText: 'Give Remark...',
-                                labelClsExtra: 'some-class',
-                                fieldStyle: 'text-align: left;font-size: 12px;',
-                                autoScroll: true
-                            }]
+                            xtype: 'numberfield',
+                            name: 'selling_price',
+                            fieldLabel: 'Selling Price',
+                            filedAlign: 'top',
+                            allowBlank: false,
+                            width: 300,
+                            labelWidth: 80,
+                            minValue: 0,
+                            labelAlign: 'left',
+                            labelStyle: 'text-align:left;border solid 1px white;',
+                            labelSeparator: '',
+                            emptyText: 'Give Selling Price...',
+                            labelClsExtra: 'some-class',
+                            fieldStyle: 'text-align: left;font-size: 12px;',
+                            autoScroll: true
+                        }, {
+                            xtype: 'numberfield',
+                            name: 'sold_quantity',
+                            fieldLabel: 'Sold Qty.',
+                            filedAlign: 'top',
+                            allowBlank: false,
+                            width: 300,
+                            labelWidth: 80,
+                            minValue: 0,
+                            labelAlign: 'left',
+                            labelStyle: 'text-align:left;border solid 1px white;',
+                            labelSeparator: '',
+                            emptyText: 'Give Sold Quantity...',
+                            labelClsExtra: 'some-class',
+                            fieldStyle: 'text-align: left;font-size: 12px;',
+                            autoScroll: true
+                        }, {
+                            xtype: 'numberfield',
+                            name: 'discount',
+                            fieldLabel: 'Discount',
+                            filedAlign: 'top',
+                            allowBlank: true,
+                            width: 300,
+                            labelWidth: 80,
+                            minValue: 0,
+                            labelAlign: 'left',
+                            labelStyle: 'text-align:left;border solid 1px white;',
+                            labelSeparator: '',
+                            emptyText: 'Give Discount...',
+                            labelClsExtra: 'some-class',
+                            fieldStyle: 'text-align: left;font-size: 12px;',
+                            autoScroll: true
+                        }, {
+                            xtype: 'datefield',
+                            name: 'in_date',
+                            fieldLabel: 'Date',
+                            filedAlign: 'top',
+                            allowBlank: true,
+                            width: 300,
+                            labelWidth: 80,
+                            minValue: 0,
+                            labelAlign: 'left',
+                            labelStyle: 'text-align:left;border solid 1px white;',
+                            labelSeparator: '',
+                            emptyText: 'Give Date...',
+                            labelClsExtra: 'some-class',
+                            fieldStyle: 'text-align: left;font-size: 12px;',
+                            autoScroll: true
+                        }, {
+                            xtype: 'textfield',
+                            name: 'remark',
+                            fieldLabel: 'Remark',
+                            filedAlign: 'top',
+                            allowBlank: true,
+                            width: 300,
+                            labelWidth: 80,
+                            minValue: 0,
+                            labelAlign: 'left',
+                            labelStyle: 'text-align:left;border solid 1px white;',
+                            labelSeparator: '',
+                            emptyText: 'Give Remark...',
+                            labelClsExtra: 'some-class',
+                            fieldStyle: 'text-align: left;font-size: 12px;',
+                            autoScroll: true
+                        }]
                     }]
                 })]
             }],
@@ -595,5 +649,3 @@ function SalesProductFormWindow() {
         })]
     }).show();
 }
-
-

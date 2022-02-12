@@ -48,3 +48,21 @@
 	"Reason": "kost",
 	'Expence_money': 160 
 }
+
+
+listeners: {
+                                        change: function(combo, newValue, oldValue) {
+                                            // console.log({combo})
+                                            // console.log({newValue})
+                                            // console.log({oldValue})
+                                            //combo have method get selected record using {combo.getSelection()}
+                                            // var selectedRecord = combo.getSelection().data
+                                            var buying_price = combo.getSelection().data.buying_price;
+                                            var item_name = combo.getSelection().data.item_name;
+                                            console.log({buying_price})
+                                            console.log({item_name})
+                                            //Instead of using Ext.getCmp() you can use up or down inside of component.
+                                            // combo.up('panel').down('#fieldGroup').setValue(buying_price);
+                                            combo.up('panel').down('#fieldGroup').setValue(selectedRecord.get("item_code"));
+                                        }
+                                    }

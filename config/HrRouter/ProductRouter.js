@@ -7,7 +7,9 @@ const pdf = require('html-pdf');
 const multer = require('multer');
 const xlsx = require('xlsx');
 const excel = require('exceljs');
-const { setTimeout } = require('timers');
+const {
+    setTimeout
+} = require('timers');
 const upload = multer({
     dest: 'public/uploads/'
 });
@@ -99,7 +101,7 @@ function routerInit(app, dbFull) {
                 }
             };
         }
-        
+
         if (QUERY.item_code) {
             SEARCH = {
                 item_code: {
@@ -151,6 +153,32 @@ function routerInit(app, dbFull) {
     app.get('/getProductTypeList', function(req, res) {
         res.setHeader('Content-Type', 'application/json');
         db.product_type.findAll().then(rData => {
+            res.send(rData);
+        }).catch(err => {
+            res.send([]);
+        })
+    });
+
+    app.get('/singleProductInventory/:DID', function(req, res) {
+        res.setHeader('Content-Type', 'application/json');
+        db.inv_product.findAll({
+            where: {
+                product_type: req.params.DID
+            }
+        }).then(rData => {
+            res.send(rData);
+        }).catch(e => {
+            res.send([]);
+        });
+    });
+
+    app.get('/getProductTypeComboList', function(req, res) {
+        res.setHeader('Content-Type', 'application/json');
+        db.inv_product.findAll({
+            include: [{
+                model: db.product_type,
+            }]
+        }).then(rData => {
             res.send(rData);
         }).catch(err => {
             res.send([]);
