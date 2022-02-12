@@ -452,10 +452,18 @@ function SalesProductFormWindow() {
                                     listeners: {
                                         // blur: function(self, The, eOpts) {
                                         change: function(combo, newValue, oldValue) {
-                                            var item_name = combo.getSelection().data.item_name;
-                                            console.log(item_name)
+                                            let item_name = combo.getSelection().data.item_name;
+                                            let BuyingPrice = combo.getSelection().data.buying_price;
+                                            let CurrentStock = combo.getSelection().data.buying_quantity - combo.getSelection().data.sold_quantity;
+
                                             if (Ext.getCmp("userInputFormFingerPrintIDField").getValue() == 0)
                                                 Ext.getCmp("userInputFormFingerPrintIDField").setValue(item_name);
+
+                                            if (Ext.getCmp("userInputFormCurrentStockField").getValue() == 0)
+                                                Ext.getCmp("userInputFormCurrentStockField").setValue(CurrentStock);
+
+                                            if (Ext.getCmp("userInputFormBuyPriceField").getValue() == 0)
+                                                Ext.getCmp("userInputFormBuyPriceField").setValue(BuyingPrice);
                                         }
                                     }
 
@@ -481,34 +489,35 @@ function SalesProductFormWindow() {
                                 fieldStyle: 'text-align: left;font-size: 12px;',
                                 autoScroll: true
                             }, {
-                                xtype: 'numberfield',
-                                name: 'buying_price',
-                                fieldLabel: 'Buying Price',
+                                xtype: 'textfield',
+                                name: 'CurrentStock',
+                                id: 'userInputFormCurrentStockField',
+                                fieldLabel: 'Available Stock',
                                 filedAlign: 'top',
-                                allowBlank: false,
+                                // allowBlank: false,
+                                editable: false,
                                 width: 300,
                                 labelWidth: 90,
-                                minValue: 0,
                                 labelAlign: 'left',
                                 labelStyle: 'text-align:left;border solid 1px white;',
                                 labelSeparator: '',
-                                emptyText: 'Give Buying Price...',
+                                // emptyText: 'Give Available Stock...',
                                 labelClsExtra: 'some-class',
                                 fieldStyle: 'text-align: left;font-size: 12px;',
                                 autoScroll: true
                             }, {
-                                xtype: 'numberfield',
-                                name: 'buying_quantity',
-                                fieldLabel: 'Buying Qty',
+                                xtype: 'textfield',
+                                id: 'userInputFormBuyPriceField',
+                                name: 'BuyingPrice',
+                                fieldLabel: 'Buying Prcie',
                                 filedAlign: 'top',
-                                allowBlank: false,
+                                editable: false,
                                 width: 300,
                                 labelWidth: 90,
-                                minValue: 0,
                                 labelAlign: 'left',
                                 labelStyle: 'text-align:left;border solid 1px white;',
                                 labelSeparator: '',
-                                emptyText: 'Give AIT...',
+                                emptyText: 'Give Buy Price...',
                                 labelClsExtra: 'some-class',
                                 fieldStyle: 'text-align: left;font-size: 12px;',
                                 autoScroll: true
