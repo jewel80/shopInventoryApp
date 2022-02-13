@@ -35,7 +35,6 @@ app.use(passport.session())
 app.use(flash()); // use connect-flash for flash messages stored in session
 
 // /////////////////////////////////////////////////////////////////////////////////
-// /////////////////////////////////////////////////////////////////////////////////
 
 const myLogFunc = function(msg, a) {
     console.log(msg)
@@ -47,7 +46,6 @@ function connect(db) {
     const dbPass = 'Admin@123';
     // const dbPass = '1234';
     const sequelize = new Sequelize(dbName, dbUser, dbPass, {
-        // host: 'DESKTOP-1L6A1AM',
         host: 'DESKTOP-GSOMSP9',
         dialect: 'mssql',
         timezone: '+06:00',
