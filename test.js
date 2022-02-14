@@ -66,3 +66,26 @@ listeners: {
                                             combo.up('panel').down('#fieldGroup').setValue(selectedRecord.get("item_code"));
                                         }
                                     }
+
+
+
+
+
+
+
+
+
+
+product_type: 1
+product_item_code: 1
+item_name: "Couple Ring with Box"
+CurrentStock: "8"
+BuyingPrice: "50"
+
+
+
+date: "02/03/2022"
+discount: "10"
+quantity: "1"
+remark: "na"
+sales_price: "80"

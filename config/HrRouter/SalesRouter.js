@@ -7,7 +7,9 @@ const pdf = require('html-pdf');
 const multer = require('multer');
 const xlsx = require('xlsx');
 const excel = require('exceljs');
-const { setTimeout } = require('timers');
+const {
+    setTimeout
+} = require('timers');
 const upload = multer({
     dest: 'public/uploads/'
 });
@@ -32,7 +34,7 @@ function routerInit(app, dbFull) {
                 }
             };
         }
-        
+
         if (QUERY.item_code) {
             SEARCH = {
                 item_code: {
@@ -98,44 +100,45 @@ function routerInit(app, dbFull) {
         })
     });
 
-    app.post('/CreateProductType', function(req, res) {
-        var DATA = req.body;
-        db.product_type.create({
-            name: DATA.name,
-            description: DATA.description
-        }).then(cB => {
-            res.send('Success');
-        }).catch(e => {
-            res.send('Error');
-        })
-    });
 
-
-    app.post('/CreateSales', function(req, res) {
+    app.post('/CreateSalesProduct', function(req, res) {
         var DATA = req.body;
-        console.log('==========A============')
-        console.log(DATA)
-        console.log('==========B============')
+        var totalPrice = (DATA.sales_price * DATA.quantity) - DATA.discount;
         db.sales.create({
-            // serial: DATA.serial,
-            product_type: DATA.product_type,
+            products: DATA.product_item_code,
             item_name: DATA.item_name,
             item_code: DATA.item_code,
-            buying_price: DATA.buying_price,
-            buying_quantity: DATA.buying_quantity,
-            selling_price: DATA.selling_price,
-            sold_quantity: DATA.sold_quantity,
-            // remaining: DATA.remaining,
+            sales_price: DATA.sales_price,
+            quantity: DATA.quantity,
             discount: DATA.discount,
-            in_date: new Date(),
-            remark: DATA.remark,
-
-            // date: new Date(),
+            total_price: totalPrice,
+            date: DATA.date ? DATA.date : new Date(),
+            remark: DATA.remark
         }).then(cB => {
-            // console.log(cB);
-            res.send('Success');
+            db.inv_product.findOne({
+                where: {
+                    id: DATA.product_item_code
+                }
+            }).then(rData => {
+                var data = JSON.parse(JSON.stringify(rData))
+                var BefoureQty = parseInt(data.sold_quantity);
+                var SaleQty = parseInt(DATA.quantity);
+                var totalSoldQty = BefoureQty + SaleQty;
+                db.inv_product.update({
+                    sold_quantity: totalSoldQty
+                }, {
+                    where: {
+                        id: DATA.product_item_code
+                    }
+                }).then(cB => {
+                    res.send('Success');
+                }).catch(e => {
+                    res.send('Error');
+                })
+            }).catch(e => {
+                res.send('Error');
+            })
         }).catch(e => {
-            console.log(e);
             res.send('Error');
         })
     });

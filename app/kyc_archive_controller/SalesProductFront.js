@@ -314,7 +314,7 @@ function salesProductGrid(UN) {
 }
 
 function SalesProductFormWindow() {
-    var depID = 1;
+    var prodID = 1;
     return Ext.create('Ext.window.Window', {
         title: 'Add New Sales Product',
         modal: true,
@@ -392,11 +392,11 @@ function SalesProductFormWindow() {
                                     listeners: {
                                         blur: function(self, The, eOpts) {
                                             if (self.value) {
-                                                depID = self.value;
+                                                prodID = self.value;
                                                 Ext.getCmp("userInputFormProductItemCodeField").setDisabled(false);
                                                 Ext.getCmp("userInputFormProductItemCodeField").getStore().setProxy({
                                                     type: 'ajax',
-                                                    url: '/singleProductInventory/' + depID
+                                                    url: '/singleProductInventory/' + prodID
                                                 }).load();
                                             }
                                         }
@@ -441,7 +441,7 @@ function SalesProductFormWindow() {
                                         limit: 0,
                                         proxy: {
                                             type: 'ajax',
-                                            url: '/singleProductInventory' + depID,
+                                            url: '/singleProductInventory' + prodID,
                                             reader: {
                                                 root: 'rows'
                                             }
@@ -476,15 +476,13 @@ function SalesProductFormWindow() {
                                 name: 'item_name',
                                 fieldLabel: ' Item Name',
                                 filedAlign: 'top',
-                                allowBlank: false,
                                 width: 300,
-                                disabled: true,
+                                editable: false,
                                 labelWidth: 90,
-                                minValue: 0,
                                 labelAlign: 'left',
                                 labelStyle: 'text-align:left;border solid 1px white;',
                                 labelSeparator: '',
-                                emptyText: 'Give Item Name...',
+                                // emptyText: 'Give Item Name...',
                                 labelClsExtra: 'some-class',
                                 fieldStyle: 'text-align: left;font-size: 12px;',
                                 autoScroll: true
@@ -494,14 +492,12 @@ function SalesProductFormWindow() {
                                 id: 'userInputFormCurrentStockField',
                                 fieldLabel: 'Available Stock',
                                 filedAlign: 'top',
-                                // allowBlank: false,
                                 editable: false,
                                 width: 300,
                                 labelWidth: 90,
                                 labelAlign: 'left',
                                 labelStyle: 'text-align:left;border solid 1px white;',
                                 labelSeparator: '',
-                                // emptyText: 'Give Available Stock...',
                                 labelClsExtra: 'some-class',
                                 fieldStyle: 'text-align: left;font-size: 12px;',
                                 autoScroll: true
@@ -517,7 +513,7 @@ function SalesProductFormWindow() {
                                 labelAlign: 'left',
                                 labelStyle: 'text-align:left;border solid 1px white;',
                                 labelSeparator: '',
-                                emptyText: 'Give Buy Price...',
+                                // emptyText: 'Give Buy Price...',
                                 labelClsExtra: 'some-class',
                                 fieldStyle: 'text-align: left;font-size: 12px;',
                                 autoScroll: true
@@ -533,8 +529,8 @@ function SalesProductFormWindow() {
                         },
                         items: [{
                             xtype: 'numberfield',
-                            name: 'selling_price',
-                            fieldLabel: 'Selling Price',
+                            name: 'sales_price',
+                            fieldLabel: 'Sale price',
                             filedAlign: 'top',
                             allowBlank: false,
                             width: 300,
@@ -543,14 +539,14 @@ function SalesProductFormWindow() {
                             labelAlign: 'left',
                             labelStyle: 'text-align:left;border solid 1px white;',
                             labelSeparator: '',
-                            emptyText: 'Give Selling Price...',
+                            emptyText: 'Give Sale price...',
                             labelClsExtra: 'some-class',
                             fieldStyle: 'text-align: left;font-size: 12px;',
                             autoScroll: true
                         }, {
                             xtype: 'numberfield',
-                            name: 'sold_quantity',
-                            fieldLabel: 'Sold Qty.',
+                            name: 'quantity',
+                            fieldLabel: 'Sale Qty.',
                             filedAlign: 'top',
                             allowBlank: false,
                             width: 300,
@@ -559,7 +555,7 @@ function SalesProductFormWindow() {
                             labelAlign: 'left',
                             labelStyle: 'text-align:left;border solid 1px white;',
                             labelSeparator: '',
-                            emptyText: 'Give Sold Quantity...',
+                            emptyText: 'Give Sale Quantity...',
                             labelClsExtra: 'some-class',
                             fieldStyle: 'text-align: left;font-size: 12px;',
                             autoScroll: true
@@ -581,7 +577,7 @@ function SalesProductFormWindow() {
                             autoScroll: true
                         }, {
                             xtype: 'datefield',
-                            name: 'in_date',
+                            name: 'date',
                             fieldLabel: 'Date',
                             filedAlign: 'top',
                             allowBlank: true,
@@ -627,13 +623,14 @@ function SalesProductFormWindow() {
                     var panel = this.up('form');
                     var form = panel.getForm();
                     var values = form.getValues();
+                    console.log({values})
                     for (var key in values) {
                         if (values[key] === '') {
                             values[key] = null;
                         }
                     }
                     Ext.Ajax.request({
-                        url: '/CreateInvProduct',
+                        url: '/CreateSalesProduct',
                         method: 'POST',
                         params: values,
                         success: function(response) {
