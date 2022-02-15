@@ -65,45 +65,20 @@ function salesProductGrid(UN) {
                 afterrender: function(self, eOpts) {}
             }
         },
-        tbar: [
-
-            /*Ext.create('Ext.form.field.ComboBox', {
-                name: 'product_type',
-                id: 'inv_product_type_search',
-                editable: false,
-                emptyText: 'Search By Category...',
-                queryMode: 'local',
-                displayField: 'name',
-                valueField: 'id',
-                padding: 5,
-                store: {
-                    fields: ['id', 'name'],
-                    pageSize: 0,
-                    limit: 0,
-                    proxy: {
-                        type: 'ajax',
-                        url: '/getProductTypeList',
-                        reader: {
-                            root: 'rows'
-                        }
-                    },
-                    autoLoad: true,
-                    autoSync: true
-                },
-                listeners: {
-                    change: {
-                        fn: function(field, value) {
-                            sales_product_grid.paramsReload({
-                                product_type: value
-                            });
-                        }
-                    }
-                }
-            }), Ext.create('Ext.form.field.Text', {
+        features: [{
+            ftype: 'summary',
+            dock: 'bottom'
+        }],
+        tbar: [Ext.create('Ext.form.field.Text', {
                 name: 'item_name',
-                id: 'inv_item_name_search',
+                id: 'sales_item_name_search',
                 emptyText: 'Search By Item Name...',
                 padding: 5,
+                border: 2,
+                style: {
+                    borderColor: 'green',
+                    borderStyle: 'solid'
+                },
                 listeners: {
                     change: {
                         fn: function(field, value) {
@@ -115,9 +90,14 @@ function salesProductGrid(UN) {
                 }
             }), Ext.create('Ext.form.field.Text', {
                 name: 'item_code',
-                id: 'inv_item_code_search',
+                id: 'sales_item_code_search',
                 emptyText: 'Search By Item Code...',
                 padding: 5,
+                border: 2,
+                style: {
+                    borderColor: 'green',
+                    borderStyle: 'solid'
+                },
                 listeners: {
                     change: {
                         fn: function(field, value) {
@@ -128,9 +108,14 @@ function salesProductGrid(UN) {
                     }
                 }
             }), Ext.create('Ext.form.field.Date', {
-                id: 'inv_start_date_search',
+                id: 'sales_start_date_search',
                 name: 'from_date',
                 padding: 5,
+                border: 2,
+                style: {
+                    borderColor: 'green',
+                    borderStyle: 'solid'
+                },
                 emptyText: 'Select From Date...',
                 listeners: {
                     change: {
@@ -142,9 +127,14 @@ function salesProductGrid(UN) {
                     }
                 }
             }), Ext.create('Ext.form.field.Date', {
-                id: 'inv_end_date_search',
+                id: 'sales_end_date_search',
                 name: 'to_date',
                 padding: 5,
+                border: 2,
+                style: {
+                    borderColor: 'green',
+                    borderStyle: 'solid'
+                },
                 emptyText: 'Select To Date...',
                 listeners: {
                     change: {
@@ -165,19 +155,18 @@ function salesProductGrid(UN) {
                     borderStyle: 'solid'
                 },
                 handler: function() {
-                    Ext.getCmp('inv_product_type_search').setValue(undefined);
-                    Ext.getCmp('inv_item_name_search').setValue(undefined);
-                    Ext.getCmp('inv_item_code_search').setValue(undefined);
-                    Ext.getCmp('inv_start_date_search').setValue(undefined);
-                    Ext.getCmp('inv_end_date_search').setValue(undefined);
+                    Ext.getCmp('sales_start_date_search').setValue(undefined);
+                    Ext.getCmp('sales_end_date_search').setValue(undefined);
+                    Ext.getCmp('sales_item_name_search').setValue(undefined);
+                    Ext.getCmp('sales_item_code_search').setValue(undefined);
                     Ext.getCmp('sales_product_grid').getStore().load();
                 }
-            }, */
+            },
 
             {
                 xtype: 'button',
                 icon: '/public/icons/create.png',
-                tooltip: 'Add New BOX Archive',
+                tooltip: 'Add New Sales Product',
                 hidden: (UN.role < 2) ? true : false,
                 border: 1,
                 style: {
@@ -203,76 +192,120 @@ function salesProductGrid(UN) {
         ],
         // }, gridPaging],
         columns: [Ext.create('Ext.grid.RowNumberer', {
-            width: 50
+            width: 50,
         }), {
+            header: 'DATE',
+            dataIndex: 'date',
+            tdCls: 'x-change-cell',
+            renderer: Ext.util.Format.dateRenderer('d-M-Y'),
+            align: 'center',
+            width: 110,
+            editor: {
+                xtype: 'datefield',
+            },
+            listeners: {
+                beforerender: function(self, eOpts) {
+                    if (UN.role < 2)
+                        self.editor = false;
+                }
+            },
+        }, {
             header: 'ITEM NAME',
             dataIndex: 'item_name',
             align: 'left',
             flex: .4,
         }, {
-            header: 'ITEM CODE',
-            dataIndex: 'item_name',
-            align: 'left',
-            editor: 'textfield',
-            flex: .4,
-            listeners: {
-                beforerender: function(self, eOpts) {
-                    if (UN.role < 2)
-                        self.editor = false;
-                }
-            },
-        }, {
-            header: 'INV ITEM CODE',
+            header: 'PRODUCT ITEM CODE',
             dataIndex: 'inv_item_code',
             align: 'left',
-            flex: .4,
-        }, {
-            header: 'SALES PRICE',
-            dataIndex: 'sales_price',
-            align: 'left',
-            editor: 'textfield',
-            flex: .4,
-            listeners: {
-                beforerender: function(self, eOpts) {
-                    if (UN.role < 2)
-                        self.editor = false;
-                }
-            },
+            width: 130,
+            // renderer: function(value, meta) {
+            //     meta.style = "background-color: rgb(210 245 233)";
+            //     return value;
+            // },
         }, {
             header: 'SALES QTY',
             dataIndex: 'quantity',
-            align: 'left',
+            align: 'right',
             editor: 'textfield',
-            flex: .4,
+            width: 130,
             listeners: {
                 beforerender: function(self, eOpts) {
                     if (UN.role < 2)
                         self.editor = false;
                 }
+            },
+            renderer: function(value, meta) {
+                meta.style = "background-color: rgb(210 245 233)";
+                return value;
+            },
+            summaryType: 'sum',
+            summaryRenderer: function(value, summaryData, field, metaData) {
+                return '<b><big>' + Ext.String.format('{0}', value) + '</big></b>';
+            },
+        }, {
+            header: 'SALES PRICE',
+            dataIndex: 'sales_price',
+            align: 'right',
+            editor: 'textfield',
+            width: 130,
+            listeners: {
+                beforerender: function(self, eOpts) {
+                    if (UN.role < 2)
+                        self.editor = false;
+                }
+            },
+            summaryType: 'sum',
+            summaryRenderer: function(value, summaryData, dataIndex) {
+                return '<b><big>৳' + value.formatMoney(2, '.', ',') + '</big></b> ';
+            },
+            renderer: function(value, meta, record, rowIdx, colIdx, store, view) {
+                meta.css = 'light-orange-column';
+                return value.formatMoney(2, '.', ',');
             },
         }, {
             header: 'DISCOUNT',
             dataIndex: 'discount',
-            align: 'left',
+            align: 'right',
             editor: 'textfield',
-            flex: .4,
+            width: 110,
             listeners: {
                 beforerender: function(self, eOpts) {
                     if (UN.role < 2)
                         self.editor = false;
                 }
             },
+            renderer: function(value, meta) {
+                meta.css = 'light-yellow-column';
+                return value;
+            },
+            // renderer: function(value, meta) {
+            //     if (parseInt(value) > 0) {
+            //         meta.css = 'light-green-column';
+            //     } else {
+            //         meta.css = 'light-red-column';
+            //     }
+            //     return value;
+            // }
         }, {
             header: 'TOTAL PRICE',
             dataIndex: 'total_price',
-            align: 'left',
+            align: 'right',
             editor: 'textfield',
-            flex: .4,
+            width: 130,
             listeners: {
                 beforerender: function(self, eOpts) {
                     if (UN.role < 2)
                         self.editor = false;
                 }
+            },
+            summaryType: 'sum',
+            summaryRenderer: function(value, summaryData, dataIndex) {
+                return '<b><big>৳' + value.formatMoney(2, '.', ',') + '</big></b> ';
+            },
+            renderer: function(value, meta, record, rowIdx, colIdx, store, view) {
+                meta.css = 'light-red-column';
+                return value.formatMoney(2, '.', ',');
             },
         }, {
             header: 'REMARKS',
@@ -286,22 +319,10 @@ function salesProductGrid(UN) {
                         self.editor = false;
                 }
             },
-        }, {
-            header: 'DATE',
-            dataIndex: 'date',
-            tdCls: 'x-change-cell',
-            renderer: Ext.util.Format.dateRenderer('d-M-Y'),
-            align: 'center',
-            flex: .4,
-            editor: {
-                xtype: 'datefield',
-            },
-            listeners: {
-                beforerender: function(self, eOpts) {
-                    if (UN.role < 2)
-                        self.editor = false;
-                }
-            },
+            // renderer: function(value, meta) {
+            //     meta.style = "background-color: rgb(210 245 233)";
+            //     return value;
+            // },
         }],
         selModel: 'cellmodel',
         plugins: [Ext.create('Ext.grid.plugin.CellEditing', {
@@ -557,7 +578,7 @@ function SalesProductFormWindow() {
                             fieldStyle: 'text-align: left;font-size: 12px;',
                             autoScroll: true,
                             validator: function(value) {
-                                var currentStock = Ext.getCmp('userInputFormCurrentStockField').value; 
+                                var currentStock = Ext.getCmp('userInputFormCurrentStockField').value;
                                 if (value <= currentStock) {
                                     return true;
                                 } else {
@@ -625,9 +646,14 @@ function SalesProductFormWindow() {
                 text: 'Submit',
                 formBind: true,
                 handler: function() {
+                    var myComboBox = Ext.getCmp("userInputFormProductItemCodeField").displayTplData;
+                    for (var i = 0; i < myComboBox.length; i++) {
+                        var ItemCode = myComboBox[i].item_code;
+                    }
                     var panel = this.up('form');
                     var form = panel.getForm();
                     var values = form.getValues();
+                    values.ItemCode = ItemCode;
                     console.log({
                         values
                     })

@@ -110,7 +110,7 @@ function routerInit(app, dbFull) {
             };
         }
 
-        console.log(QUERY)
+        // console.log(QUERY)
 
         // var f = new Date();
         // var t = new Date();
@@ -124,11 +124,12 @@ function routerInit(app, dbFull) {
         // SEARCH.date.between = [f, t];
 
         // if (DATA.from_date) {
-        //     success = true;
+        //     // success = true;
         //     var f = new Date(DATA.from_date);
         //     f.setHours(0);
-        //     var t = new Date(DATA.to_date);
-        //     t.setHours(18);
+        //     var t =new Date(new Date(to_date) - 24 * 60 * 60 * 1000);
+        //     // var t = new Date(DATA.to_date);
+        //     // t.setHours(18);
         //     SEARCH.date = {};
         //     SEARCH.date.between = [f, t];
         // }

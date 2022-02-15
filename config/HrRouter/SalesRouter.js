@@ -25,8 +25,7 @@ function routerInit(app, dbFull) {
         res.setHeader('Content-Type', 'application/json');
         var QUERY = (req.query) ? req.query : {};
         var SEARCH = {};
-        if (QUERY.product_type)
-            SEARCH.product_type = QUERY.product_type;
+
         if (QUERY.item_name) {
             SEARCH = {
                 item_name: {
@@ -43,11 +42,35 @@ function routerInit(app, dbFull) {
             };
         }
 
-        console.log(QUERY)
+        if (QUERY.from_date != null && QUERY.to_date != null) {
+            var f = new Date(QUERY.from_date);
+            var t = new Date(QUERY.to_date);
+            var f = (f.getFullYear()) + '-' + (f.getMonth() + 1) + '-' + f.getDate();
+            var t = (t.getFullYear()) + '-' + (t.getMonth() + 1) + '-' + t.getDate();
+            SEARCH.date = {};
+            SEARCH.date = {
+                [Op.between]: [f, t]
+            };
 
+        }
+
+        console.log('======Q==========')
+        console.log(QUERY)
+        console.log('=======Q E=========')
+
+        // var f = new Date("2022-02-16 00:00:00");
+        // var t = new Date("2022-02-16 00:00:00");
+
+        console.log('------------------')
         console.log(SEARCH)
+        console.log('------------------')
         db.sales.findAndCountAll({
-            // where: SEARCH,
+            where: SEARCH,
+            // where: {
+            //     date: {
+            //         [Op.between]: [f, t]
+            //     },
+            // },
             include: [{
                 model: db.inv_product,
             }],
@@ -103,11 +126,12 @@ function routerInit(app, dbFull) {
 
     app.post('/CreateSalesProduct', function(req, res) {
         var DATA = req.body;
+        console.log(DATA)
         var totalPrice = (DATA.sales_price * DATA.quantity) - DATA.discount;
         db.sales.create({
             products: DATA.product_item_code,
             item_name: DATA.item_name,
-            item_code: DATA.item_code,
+            item_code: DATA.ItemCode,
             sales_price: DATA.sales_price,
             quantity: DATA.quantity,
             discount: DATA.discount,
