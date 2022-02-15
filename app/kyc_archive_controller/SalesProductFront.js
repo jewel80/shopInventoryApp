@@ -450,11 +450,10 @@ function SalesProductFormWindow() {
                                         autoSync: true
                                     },
                                     listeners: {
-                                        // blur: function(self, The, eOpts) {
                                         change: function(combo, newValue, oldValue) {
-                                            let item_name = combo.getSelection().data.item_name;
-                                            let BuyingPrice = combo.getSelection().data.buying_price;
-                                            let CurrentStock = combo.getSelection().data.buying_quantity - combo.getSelection().data.sold_quantity;
+                                            var item_name = combo.getSelection().data.item_name;
+                                            var BuyingPrice = combo.getSelection().data.buying_price;
+                                            var CurrentStock = combo.getSelection().data.buying_quantity - combo.getSelection().data.sold_quantity;
 
                                             if (Ext.getCmp("userInputFormFingerPrintIDField").getValue() == 0)
                                                 Ext.getCmp("userInputFormFingerPrintIDField").setValue(item_name);
@@ -482,7 +481,6 @@ function SalesProductFormWindow() {
                                 labelAlign: 'left',
                                 labelStyle: 'text-align:left;border solid 1px white;',
                                 labelSeparator: '',
-                                // emptyText: 'Give Item Name...',
                                 labelClsExtra: 'some-class',
                                 fieldStyle: 'text-align: left;font-size: 12px;',
                                 autoScroll: true
@@ -513,7 +511,6 @@ function SalesProductFormWindow() {
                                 labelAlign: 'left',
                                 labelStyle: 'text-align:left;border solid 1px white;',
                                 labelSeparator: '',
-                                // emptyText: 'Give Buy Price...',
                                 labelClsExtra: 'some-class',
                                 fieldStyle: 'text-align: left;font-size: 12px;',
                                 autoScroll: true
@@ -558,7 +555,15 @@ function SalesProductFormWindow() {
                             emptyText: 'Give Sale Quantity...',
                             labelClsExtra: 'some-class',
                             fieldStyle: 'text-align: left;font-size: 12px;',
-                            autoScroll: true
+                            autoScroll: true,
+                            validator: function(value) {
+                                var currentStock = Ext.getCmp('userInputFormCurrentStockField').value; 
+                                if (value <= currentStock) {
+                                    return true;
+                                } else {
+                                    return "The product Qty is not available in stores.";
+                                }
+                            }
                         }, {
                             xtype: 'numberfield',
                             name: 'discount',
@@ -623,7 +628,9 @@ function SalesProductFormWindow() {
                     var panel = this.up('form');
                     var form = panel.getForm();
                     var values = form.getValues();
-                    console.log({values})
+                    console.log({
+                        values
+                    })
                     for (var key in values) {
                         if (values[key] === '') {
                             values[key] = null;
