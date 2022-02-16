@@ -248,7 +248,7 @@ function inventoryProductGrid(UN) {
             dataIndex: 'item_name',
             align: 'left',
             editor: 'textfield',
-            width: 170,
+            width: 140,
             listeners: {
                 beforerender: function(self, eOpts) {
                     if (UN.role < 2)
@@ -259,7 +259,7 @@ function inventoryProductGrid(UN) {
             header: 'ITEM CODE',
             dataIndex: 'item_code',
             align: 'left',
-            width: 180,
+            width: 150,
         }, {
             header: 'BUYING PRICE',
             dataIndex: 'buying_price',
@@ -301,7 +301,7 @@ function inventoryProductGrid(UN) {
                 return '<b><big>' + Ext.String.format('{0}', value) + '</big></b>';
             },
         }, {
-            header: 'SELLING PRICE',
+            header: 'SALES PRICE',
             dataIndex: 'selling_price',
             align: 'right',
             editor: 'textfield',

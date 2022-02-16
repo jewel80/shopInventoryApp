@@ -110,29 +110,17 @@ function routerInit(app, dbFull) {
             };
         }
 
-        // console.log(QUERY)
+        if (QUERY.from_date != null && QUERY.to_date != null) {
+            var f = new Date(QUERY.from_date);
+            var t = new Date(QUERY.to_date);
+            var f = (f.getFullYear()) + '-' + (f.getMonth() + 1) + '-' + f.getDate();
+            var t = (t.getFullYear()) + '-' + (t.getMonth() + 1) + '-' + t.getDate();
+            SEARCH.in_date = {};
+            SEARCH.in_date = {
+                [Op.between]: [f, t]
+            };
 
-        // var f = new Date();
-        // var t = new Date();
-        // t.setMonth(t.getMonth() + 6);
-        // if (QUERY.from_date)
-        //     f = new Date(QUERY.from_date);
-        // if (QUERY.to_date)
-        //     t = new Date(QUERY.to_date);
-        // var SEARCH = {};
-        // SEARCH.date = {};
-        // SEARCH.date.between = [f, t];
-
-        // if (DATA.from_date) {
-        //     // success = true;
-        //     var f = new Date(DATA.from_date);
-        //     f.setHours(0);
-        //     var t =new Date(new Date(to_date) - 24 * 60 * 60 * 1000);
-        //     // var t = new Date(DATA.to_date);
-        //     // t.setHours(18);
-        //     SEARCH.date = {};
-        //     SEARCH.date.between = [f, t];
-        // }
+        }
 
         console.log(SEARCH)
         db.inv_product.findAndCountAll({

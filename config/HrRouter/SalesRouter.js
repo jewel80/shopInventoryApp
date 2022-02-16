@@ -104,9 +104,6 @@ function routerInit(app, dbFull) {
     });
 
     app.post('/DestroySalesProduct', function(req, res) {
-        console.log(req.body)
-        console.log(req.body.id)
-
         db.sales.findOne({
             where: {
                 id: req.body.id
@@ -139,15 +136,6 @@ function routerInit(app, dbFull) {
             console.log(err)
             res.send([]);
         })
-
-
-        // db.sales.destroy({
-        //     where: req.body
-        // }).then(function(state, up) {
-        //     res.send('success');
-        // }).catch(e => {
-        //     res.send('error');
-        // })
     });
 
 
@@ -193,8 +181,6 @@ function routerInit(app, dbFull) {
             res.send('Error');
         })
     });
-
-
 
     app.get('/getProductTypeList', function(req, res) {
         res.setHeader('Content-Type', 'application/json');

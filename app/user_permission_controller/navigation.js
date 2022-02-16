@@ -239,7 +239,7 @@ function navigationFormWindow() {
                 xtype: 'combo',
                 name: 'parent',
                 fieldLabel: 'Parent',
-                allowBlank: false,
+                // allowBlank: false,
                 editable: false,
                 width: 300,
                 labelWidth: 80,

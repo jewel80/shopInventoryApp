@@ -624,7 +624,7 @@ function SalesProductFormWindow() {
                             autoScroll: true,
                             validator: function(value) {
                                 var currentStock = Ext.getCmp('userInputFormCurrentStockField').value;
-                                if (value <= currentStock) {
+                                if (parseInt(value) <= parseInt(currentStock)) {
                                     return true;
                                 } else {
                                     return "The product Qty is not available in stores.";
