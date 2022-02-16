@@ -37,6 +37,15 @@ var navigation_panel = Ext.create('Ext.panel.Panel', {
             window.location.href = site_url + 'logout';
         }
     }],
+    bbar: [{
+        icon: '/public/icons/home.png',
+        iconCls: 'add',
+        name: 'sign_out',
+        tooltip: 'Home Page',
+        handler: function() {
+            window.location.href = site_url ;
+        }
+    }],
     icon: '/public/images/orogonic_logo.png',
     width: 200,
     split: true,
