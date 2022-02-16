@@ -277,7 +277,7 @@ function inventoryProductGrid(UN) {
                 return '<b><big>৳' + value.formatMoney(2, '.', ',') + '</big></b> ';
             },
             renderer: function(value, meta, record, rowIdx, colIdx, store, view) {
-                meta.css = 'light-pink-column';
+                 meta.style = "background-color: #E0b0FF";
                 return value.formatMoney(2, '.', ',');
             },
         }, {
@@ -560,6 +560,7 @@ function inventoryProductFormWindow() {
                             fieldLabel: 'Sold Qty.',
                             filedAlign: 'top',
                             allowBlank: false,
+                            value:0,
                             width: 300,
                             labelWidth: 80,
                             minValue: 0,
