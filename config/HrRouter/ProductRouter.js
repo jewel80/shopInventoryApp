@@ -67,7 +67,7 @@ global.headerContents = function() {
         '<br />' +
         '<h3 style="' +
         'line-height: 0;' +
-        '">' + 'Orogenic Resources BD Limited' + '</h3>';
+        '">' + 'VB Fashion House' + '</h3>';
     return hC;
 }
 global.footerContents = function() {

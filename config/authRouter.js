@@ -119,7 +119,7 @@ function authRouter(app, dbFull, io) {
     app.get('/', isAuthenticated, function(req, res) {
         addExtJsFront(function(r) {
             res.render('index.ejs', {
-                title: "Nagad App",
+                title: "VB Fashion House",
                 loginUserId: req.user.id,
                 loginUserName: req.user.username,
                 extjs_app_scripts: r.extjs_app_scripts
@@ -149,7 +149,7 @@ function authRouter(app, dbFull, io) {
 
     app.get('/login', function(req, res) {
         res.render('login.ejs', {
-            title: 'Orogenic Resources Ltd.',
+            title: 'VB Fashion House',
             message: req.flash('loginMessage')
         });
     });

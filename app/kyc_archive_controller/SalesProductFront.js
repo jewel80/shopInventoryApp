@@ -323,6 +323,51 @@ function salesProductGrid(UN) {
             //     meta.style = "background-color: rgb(210 245 233)";
             //     return value;
             // },
+        }, {
+            xtype: 'actioncolumn',
+            header: 'DELETE',
+            width: 75,
+            // hidden: (UN.role < 2) ? false : true,
+            hideable: true,
+            icon: '/public/icons/delete.png',
+            tooltip: 'Delete',
+            handler: function(grid, rowIndex, colIndex, actionItem, event, record, row) {
+                Ext.Msg.show({
+                    title: 'Delete Confirm?',
+                    msg: 'Are you sure you want to delete this information. <br>It will permanently delete this information from the server',
+                    buttons: Ext.Msg.YESNO,
+                    icon: Ext.Msg.WARNING,
+                    fn: function(btn, text) {
+                        if (btn == 'yes') {
+                            var QUERY = {}
+                            QUERY.id = record.data.id;
+                            Ext.Ajax.request({
+                                url: '/DestroySalesProduct',
+                                method: 'POST',
+                                params: QUERY,
+                                success: function(response) {
+                                    if (response.responseText == 'success') {
+                                        if (Ext.getCmp('sales_product_grid')) {
+                                            Ext.getCmp('sales_product_grid').getStore().load();
+                                        }
+                                        if (Ext.getCmp('inventory_product_grid')) {
+                                            Ext.getCmp('inventory_product_grid').getStore().load();
+                                        }
+                                        Ext.MessageBox.alert('Success', 'Successfully data Deleted');
+                                    } else {
+                                        Ext.MessageBox.alert('Error', 'It Has Been Alocated In Another Functions');
+                                    }
+                                },
+                                failure: function(response) {
+                                    Ext.MessageBox.alert('Error',
+                                        'Something is Worng! Please contact with the developer');
+                                }
+                            });
+                        }
+                    }
+                });
+            },
+            align: 'center'
         }],
         selModel: 'cellmodel',
         plugins: [Ext.create('Ext.grid.plugin.CellEditing', {

@@ -54,23 +54,16 @@ function routerInit(app, dbFull) {
 
         }
 
-        console.log('======Q==========')
-        console.log(QUERY)
-        console.log('=======Q E=========')
+        // console.log('======Q==========')
+        // console.log(QUERY)
+        // console.log('=======Q E=========')
 
-        // var f = new Date("2022-02-16 00:00:00");
-        // var t = new Date("2022-02-16 00:00:00");
+        // console.log('------------------')
+        // console.log(SEARCH)
+        // console.log('------------------')
 
-        console.log('------------------')
-        console.log(SEARCH)
-        console.log('------------------')
         db.sales.findAndCountAll({
             where: SEARCH,
-            // where: {
-            //     date: {
-            //         [Op.between]: [f, t]
-            //     },
-            // },
             include: [{
                 model: db.inv_product,
             }],
@@ -84,7 +77,6 @@ function routerInit(app, dbFull) {
         })
     });
 
-
     app.get('/getProductTypeList', function(req, res) {
         res.setHeader('Content-Type', 'application/json');
         db.product_type.findAll().then(rData => {
@@ -93,8 +85,6 @@ function routerInit(app, dbFull) {
             res.send([]);
         })
     });
-
-
 
     app.post('/getSalesList', function(req, res) {
         var QUERY = {};
@@ -113,14 +103,51 @@ function routerInit(app, dbFull) {
         })
     });
 
-    app.post('/DestroyVillage', function(req, res) {
-        db.sales.destroy({
-            where: req.body
-        }).then(function(state, up) {
-            res.send('success');
-        }).catch(e => {
-            res.send('error');
+    app.post('/DestroySalesProduct', function(req, res) {
+        console.log(req.body)
+        console.log(req.body.id)
+
+        db.sales.findOne({
+            where: {
+                id: req.body.id
+            },
+            include: [{
+                model: db.inv_product,
+            }],
+        }).then(rData => {
+            var salesData = JSON.parse(JSON.stringify(rData));
+            var CurrentQty = salesData.Inv_Product_Table.sold_quantity - salesData.quantity;
+            db.inv_product.update({
+                sold_quantity: CurrentQty
+            }, {
+                where: {
+                    id: salesData.products
+                }
+            }).then(cB => {
+                db.sales.destroy({
+                    where: req.body
+                }).then(function(state, up) {
+                    res.send('success');
+                }).catch(e => {
+                    res.send('error');
+                })
+            }).catch(e => {
+                res.send('Error');
+            })
+
+        }).catch(err => {
+            console.log(err)
+            res.send([]);
         })
+
+
+        // db.sales.destroy({
+        //     where: req.body
+        // }).then(function(state, up) {
+        //     res.send('success');
+        // }).catch(e => {
+        //     res.send('error');
+        // })
     });
 
 

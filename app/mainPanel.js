@@ -1,13 +1,6 @@
 var footer_panel = Ext.create('Ext.toolbar.Toolbar', {
     region: 'south',
     border: false,
-    items: [{
-        xtype: 'tbtext',
-        text: '<b><i>Developed By Jewel Rana (Email: jewel.rana@orogenicgroup-bd.com, Contact: +880 1844-495373 )</i></b>'
-    }, '->', {
-        xtype: 'tbtext',
-        text: '<b><i>©2019 Orogenic Resources BD Ltd. All rights reserved</i></b>'
-    }]
 });
 
 var tab_panel = Ext.create('Ext.tab.Panel', {

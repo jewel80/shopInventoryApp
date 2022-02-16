@@ -17,7 +17,7 @@
 body {
     font: 13px/20px "Open Sans", Tahoma, Verdana, sans-serif;
     color: #a7a599;
-    background: #48a048;
+    background: #1c4e46;
 }
 
 
@@ -92,7 +92,7 @@ body {
     /*text-transform: uppercase;*/
     color: #fff;
     text-align: center;
-    background: #5cb85c;
+    background: #1f4842;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
 }
@@ -243,9 +243,9 @@ input[type=password] {
     font-weight: bold;
     padding: 12px 0;
     letter-spacing: 0;
-    box-shadow: inset 0px 0px 0px 0px #40c140;
+    box-shadow: inset 0px 0px 0px 0px #2f8f81;
     color: #fff;
-    background-color: #5cb85c;
+    background-color: #1f4842;
     text-shadow: none;
     text-transform: uppercase;
     border: none;
@@ -259,7 +259,7 @@ input[type=password] {
 .form input[type=submit]:hover,
 input[type=submit]:focus {
     color: #fff;
-    box-shadow: inset 0px 46px 0px 0px #40c140;
+    box-shadow: inset 0px 46px 0px 0px #2f8f81;
     -webkit-animation: shadowFade 0.4s;
     -moz-animation: shadowFade 0.4s;
 }
@@ -269,72 +269,72 @@ input[type=submit]:focus {
 
 @keyframes shadowFade {
     0% {
-        box-shadow: inset 0px 0px 0px 0px #40c140;
+        box-shadow: inset 0px 0px 0px 0px #2f8f81;
         color: #fff;
     }
 
     100% {
-        box-shadow: inset 0px 46px 0px 0px #40c140;
+        box-shadow: inset 0px 46px 0px 0px #2f8f81;
         color: #fff;
     }
 }
 
 @keyframes shadowFadeOut {
     0% {
-        box-shadow: inset 0px 46px 0px 0px #40c140;
+        box-shadow: inset 0px 46px 0px 0px #2f8f81;
         color: #fff;
     }
 
     100% {
-        box-shadow: inset 0px 0px 0px 0px #40c140;
+        box-shadow: inset 0px 0px 0px 0px #2f8f81;
         color: #fff;
     }
 }
 
 @-webkit-keyframes shadowFade {
     0% {
-        box-shadow: inset 0px 0px 0px 0px #40c140;
+        box-shadow: inset 0px 0px 0px 0px #2f8f81;
         color: #fff;
     }
 
     100% {
-        box-shadow: inset 0px 46px 0px 0px #40c140;
+        box-shadow: inset 0px 46px 0px 0px #2f8f81;
         color: #fff;
     }
 }
 
 @-webkit-keyframes shadowFadeOut {
     0% {
-        box-shadow: inset 0px 46px 0px 0px #40c140;
+        box-shadow: inset 0px 46px 0px 0px #2f8f81;
         color: #fff;
     }
 
     100% {
-        box-shadow: inset 0px 0px 0px 0px #40c140;
+        box-shadow: inset 0px 0px 0px 0px #2f8f81;
         color: #fff;
     }
 }
 
 @-moz-keyframes shadowFade {
     0% {
-        box-shadow: inset 0px 0px 0px 0px #40c140;
+        box-shadow: inset 0px 0px 0px 0px #2f8f81;
         color: #fff;
     }
 
     100% {
-        box-shadow: inset 0px 46px 0px 0px #40c140;
+        box-shadow: inset 0px 46px 0px 0px #2f8f81;
         color: #fff;
     }
 }
 
 @-moz-keyframes shadowFadeOut {
     0% {
-        box-shadow: inset 0px 44px 0px 0px #40c140;
+        box-shadow: inset 0px 44px 0px 0px #2f8f81;
         color: #fff;
     }
 
     100% {
-        box-shadow: inset 0px 0px 0px 0px #40c140;
+        box-shadow: inset 0px 0px 0px 0px #2f8f81;
         color: #fff;
     }
 }
