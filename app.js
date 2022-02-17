@@ -44,13 +44,14 @@ function connect(db) {
     const dbName = db;
     const dbUser = 'sa';
     const dbPass = 'Admin@123';
-    // const dbPass = '1234';
     const sequelize = new Sequelize(dbName, dbUser, dbPass, {
-        host: 'DESKTOP-GSOMSP9',
+        host: 'DESKTOP-63UBLLP',
+        // host: 'DESKTOP-GSOMSP9',
         dialect: 'mssql',
         timezone: '+06:00',
         drive: 'tedious',
-        port: '53849',
+        port: '52863',
+        // port: '53849',
         dialectOptions: {
             options: {
             instanceName: 'MSSQLSERVER2012'
@@ -89,6 +90,7 @@ const db = {};
 db.HR_DB = require(__dirname + '/config/database/hr_db.js');
 db.HR_DB.init(connect('VBfashion'));
 
+console.log(db);
 // /////////////////////////////////////////////////////////////////////////////////
 
 const server = app.listen(8000)
