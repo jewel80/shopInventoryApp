@@ -7,6 +7,7 @@ const pdf = require('html-pdf');
 const multer = require('multer');
 const xlsx = require('xlsx');
 const excel = require('exceljs');
+const moment = require('moment');
 const {
     setTimeout
 } = require('timers');
@@ -43,25 +44,15 @@ function routerInit(app, dbFull) {
         }
 
         if (QUERY.from_date != null && QUERY.to_date != null) {
-            var f = new Date(QUERY.from_date);
-            var t = new Date(QUERY.to_date);
-            var f = (f.getFullYear()) + '-' + (f.getMonth() + 1) + '-' + f.getDate();
-            var t = (t.getFullYear()) + '-' + (t.getMonth() + 1) + '-' + t.getDate();
+            let f = moment(new Date(QUERY.from_date).toISOString());
+            let t = moment(new Date(QUERY.to_date).toISOString());
             SEARCH.date = {};
             SEARCH.date = {
                 [Op.between]: [f, t]
             };
 
         }
-
-        // console.log('======Q==========')
-        // console.log(QUERY)
-        // console.log('=======Q E=========')
-
-        // console.log('------------------')
-        // console.log(SEARCH)
-        // console.log('------------------')
-
+        
         db.sales.findAndCountAll({
             where: SEARCH,
             include: [{
@@ -141,18 +132,20 @@ function routerInit(app, dbFull) {
 
     app.post('/CreateSalesProduct', function(req, res) {
         var DATA = req.body;
-        console.log(DATA)
+        //New date create with format 
+        var f = new Date();
+        var newDate = (f.getFullYear()) + '-' + (f.getMonth() + 1) + '-' + f.getDate() + ' 00:00:00.0000000 +06:00';
         var totalPrice = (DATA.sales_price * DATA.quantity) - DATA.discount;
         db.sales.create({
             products: DATA.product_item_code,
             item_name: DATA.item_name,
             item_code: DATA.ItemCode,
-            sales_price: DATA.sales_price,
+            sales_price: DATA.SalesPrice,
             quantity: DATA.quantity,
             discount: DATA.discount,
             total_price: totalPrice,
-            date: DATA.date ? DATA.date : new Date(),
-            remark: DATA.remark
+            date: DATA.date ? DATA.date : newDate,
+            remark: DATA.remark ? DATA.remark : "N/A"
         }).then(cB => {
             db.inv_product.findOne({
                 where: {

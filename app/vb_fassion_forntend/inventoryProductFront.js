@@ -277,7 +277,7 @@ function inventoryProductGrid(UN) {
                 return '<b><big>৳' + value.formatMoney(2, '.', ',') + '</big></b> ';
             },
             renderer: function(value, meta, record, rowIdx, colIdx, store, view) {
-                 meta.style = "background-color: #E0b0FF";
+                 meta.style = "background-color: #F0FFF0";
                 return value.formatMoney(2, '.', ',');
             },
         }, {
@@ -334,7 +334,7 @@ function inventoryProductGrid(UN) {
             // },
 
             renderer: function(value, meta) {
-                meta.css = 'light-green-column';
+                meta.css = 'light-orange-column';
                 return value;
             },
             summaryType: 'sum',
@@ -355,7 +355,8 @@ function inventoryProductGrid(UN) {
             },
             renderer: function(value, meta, recordX, rowIndex, colIndex, store, view) {
                 var value = (recordX.data.buying_quantity - recordX.data.sold_quantity);
-                meta.css = 'light-blue-column';
+                // meta.css = 'light-blue-column';
+                meta.style = "background-color: #B0E0E6";
                 return value;
             },
         }, {
@@ -363,14 +364,14 @@ function inventoryProductGrid(UN) {
             dataIndex: 'remark',
             align: 'left',
             editor: 'textfield',
-            flex: .4,
+            width: 200,
             listeners: {
                 beforerender: function(self, eOpts) {
                     if (UN.role < 2)
                         self.editor = false;
                 }
             },
-        }, ],
+        }],
         selModel: 'cellmodel',
         plugins: [Ext.create('Ext.grid.plugin.CellEditing', {
             clicksToEdit: 2,

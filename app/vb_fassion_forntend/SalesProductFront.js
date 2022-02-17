@@ -413,175 +413,175 @@ function SalesProductFormWindow() {
                             align: 'stretch'
                         },
                         items: [{
-                                layout: 'hbox',
-                                border: false,
-                                align: 'stretch',
-                                bodyStyle: 'padding-bottom: 7px;',
-                                items: [{
-                                    xtype: 'combo',
-                                    name: 'product_type',
-                                    fieldLabel: 'Product Type',
-                                    id: 'product_type_combo_load',
-                                    allowBlank: false,
-                                    editable: true,
-                                    width: 300,
-                                    labelWidth: 90,
-                                    labelAlign: 'left',
-                                    labelSeparator: '',
-                                    emptyText: 'Select Product Type...',
-                                    labelClsExtra: 'some-class',
-                                    fieldStyle: 'text-align: left;font-size: 12px;',
-                                    autoScroll: true,
-                                    queryMode: 'local',
-                                    displayField: 'name',
-                                    valueField: 'id',
-                                    selectOnFocus: true,
-                                    triggerAction: 'all',
-                                    anyMatch: true,
-                                    typeAhead: true,
-                                    transform: 'stateSelect',
-                                    forceSelection: true,
-                                    store: {
-                                        fields: ['id', 'name'],
-                                        pageSize: 0,
-                                        limit: 0,
-                                        proxy: {
-                                            type: 'ajax',
-                                            url: '/getProductTypeList',
-                                            reader: {
-                                                root: 'rows'
-                                            }
-                                        },
-                                        autoLoad: true,
-                                        autoSync: true
+                            layout: 'hbox',
+                            border: false,
+                            align: 'stretch',
+                            bodyStyle: 'padding-bottom: 7px;',
+                            items: [{
+                                xtype: 'combo',
+                                name: 'product_type',
+                                fieldLabel: 'Product Type',
+                                id: 'product_type_combo_load',
+                                allowBlank: false,
+                                editable: true,
+                                width: 300,
+                                labelWidth: 90,
+                                labelAlign: 'left',
+                                labelSeparator: '',
+                                emptyText: 'Select Product Type...',
+                                labelClsExtra: 'some-class',
+                                fieldStyle: 'text-align: left;font-size: 12px;',
+                                autoScroll: true,
+                                queryMode: 'local',
+                                displayField: 'name',
+                                valueField: 'id',
+                                selectOnFocus: true,
+                                triggerAction: 'all',
+                                anyMatch: true,
+                                typeAhead: true,
+                                transform: 'stateSelect',
+                                forceSelection: true,
+                                store: {
+                                    fields: ['id', 'name'],
+                                    pageSize: 0,
+                                    limit: 0,
+                                    proxy: {
+                                        type: 'ajax',
+                                        url: '/getProductTypeList',
+                                        reader: {
+                                            root: 'rows'
+                                        }
                                     },
-                                    listeners: {
-                                        blur: function(self, The, eOpts) {
-                                            if (self.value) {
-                                                prodID = self.value;
-                                                Ext.getCmp("userInputFormProductItemCodeField").setDisabled(false);
-                                                Ext.getCmp("userInputFormProductItemCodeField").getStore().setProxy({
-                                                    type: 'ajax',
-                                                    url: '/singleProductInventory/' + prodID
-                                                }).load();
-                                            }
+                                    autoLoad: true,
+                                    autoSync: true
+                                },
+                                listeners: {
+                                    blur: function(self, The, eOpts) {
+                                        if (self.value) {
+                                            prodID = self.value;
+                                            Ext.getCmp("userInputFormProductItemCodeField").setDisabled(false);
+                                            Ext.getCmp("userInputFormProductItemCodeField").getStore().setProxy({
+                                                type: 'ajax',
+                                                url: '/singleProductInventory/' + prodID
+                                            }).load();
                                         }
                                     }
+                                }
 
-                                }]
-                            },
-
-                            {
-                                layout: 'hbox',
-                                border: false,
-                                align: 'stretch',
-                                bodyStyle: 'padding-bottom: 7px;',
-                                items: [{
-                                    xtype: 'combo',
-                                    name: 'product_item_code',
-                                    fieldLabel: 'Product Code',
-                                    id: 'userInputFormProductItemCodeField',
-                                    width: 300,
-                                    labelWidth: 90,
-                                    anyMatch: true,
-                                    typeAhead: true,
-                                    transform: 'stateSelect',
-                                    forceSelection: true,
-                                    disabled: true,
-                                    allowBlank: false,
-                                    editable: true,
-                                    labelAlign: 'left',
-                                    labelSeparator: '',
-                                    emptyText: 'Select Product Item Code...',
-                                    labelClsExtra: 'some-class',
-                                    fieldStyle: 'text-align: left;font-size: 12px;',
-                                    autoScroll: true,
-                                    queryMode: 'local',
-                                    displayField: 'item_code',
-                                    valueField: 'id',
-                                    selectOnFocus: true,
-                                    triggerAction: 'all',
-                                    store: {
-                                        fields: ['id', 'item_code'],
-                                        pageSize: 0,
-                                        limit: 0,
-                                        proxy: {
-                                            type: 'ajax',
-                                            url: '/singleProductInventory' + prodID,
-                                            reader: {
-                                                root: 'rows'
-                                            }
-                                        },
-                                        autoLoad: true,
-                                        autoSync: true
-                                    },
-                                    listeners: {
-                                        change: function(combo, newValue, oldValue) {
-                                            var item_name = combo.getSelection().data.item_name;
-                                            var BuyingPrice = combo.getSelection().data.buying_price;
-                                            var CurrentStock = combo.getSelection().data.buying_quantity - combo.getSelection().data.sold_quantity;
-
-                                            if (Ext.getCmp("userInputFormFingerPrintIDField").getValue() == 0)
-                                                Ext.getCmp("userInputFormFingerPrintIDField").setValue(item_name);
-
-                                            if (Ext.getCmp("userInputFormCurrentStockField").getValue() == 0)
-                                                Ext.getCmp("userInputFormCurrentStockField").setValue(CurrentStock);
-
-                                            if (Ext.getCmp("userInputFormBuyPriceField").getValue() == 0)
-                                                Ext.getCmp("userInputFormBuyPriceField").setValue(BuyingPrice);
+                            }]
+                        }, {
+                            layout: 'hbox',
+                            border: false,
+                            align: 'stretch',
+                            bodyStyle: 'padding-bottom: 7px;',
+                            items: [{
+                                xtype: 'combo',
+                                name: 'product_item_code',
+                                fieldLabel: 'Product Code',
+                                id: 'userInputFormProductItemCodeField',
+                                width: 300,
+                                labelWidth: 90,
+                                anyMatch: true,
+                                typeAhead: true,
+                                transform: 'stateSelect',
+                                forceSelection: true,
+                                disabled: true,
+                                allowBlank: false,
+                                editable: true,
+                                labelAlign: 'left',
+                                labelSeparator: '',
+                                emptyText: 'Select Product Item Code...',
+                                labelClsExtra: 'some-class',
+                                fieldStyle: 'text-align: left;font-size: 12px;',
+                                autoScroll: true,
+                                queryMode: 'local',
+                                displayField: 'item_code',
+                                valueField: 'id',
+                                selectOnFocus: true,
+                                triggerAction: 'all',
+                                store: {
+                                    fields: ['id', 'item_code'],
+                                    pageSize: 0,
+                                    limit: 0,
+                                    proxy: {
+                                        type: 'ajax',
+                                        url: '/singleProductInventory' + prodID,
+                                        reader: {
+                                            root: 'rows'
                                         }
+                                    },
+                                    autoLoad: true,
+                                    autoSync: true
+                                },
+                                listeners: {
+                                    change: function(combo, newValue, oldValue) {
+                                        console.log(combo.getSelection().data);
+                                        var item_name = combo.getSelection().data.item_name;
+                                        var BuyingPrice = combo.getSelection().data.buying_price;
+                                        var SalesPrice = combo.getSelection().data.selling_price;
+                                        var CurrentStock = combo.getSelection().data.buying_quantity - combo.getSelection().data.sold_quantity;
+                                        console.log(SalesPrice);
+                                        if (Ext.getCmp("userInputFormFingerPrintIDField").getValue() == 0)
+                                            Ext.getCmp("userInputFormFingerPrintIDField").setValue(item_name);
+
+                                        if (Ext.getCmp("userInputFormCurrentStockField").getValue() == 0)
+                                            Ext.getCmp("userInputFormCurrentStockField").setValue(CurrentStock);
+
+                                        if (Ext.getCmp("userInputFormBuyPriceField").getValue() == 0)
+                                            Ext.getCmp("userInputFormBuyPriceField").setValue(BuyingPrice);
+
+                                        if (Ext.getCmp("userInputFormSalesPriceField").getValue() == 0)
+                                            Ext.getCmp("userInputFormSalesPriceField").setValue(SalesPrice);
                                     }
+                                }
 
-                                }]
-                            },
-
-                            {
-                                xtype: 'textfield',
-                                id: 'userInputFormFingerPrintIDField',
-                                name: 'item_name',
-                                fieldLabel: ' Item Name',
-                                filedAlign: 'top',
-                                width: 300,
-                                editable: false,
-                                labelWidth: 90,
-                                labelAlign: 'left',
-                                labelStyle: 'text-align:left;border solid 1px white;',
-                                labelSeparator: '',
-                                labelClsExtra: 'some-class',
-                                fieldStyle: 'text-align: left;font-size: 12px;',
-                                autoScroll: true
-                            }, {
-                                xtype: 'textfield',
-                                name: 'CurrentStock',
-                                id: 'userInputFormCurrentStockField',
-                                fieldLabel: 'Available Stock',
-                                filedAlign: 'top',
-                                editable: false,
-                                width: 300,
-                                labelWidth: 90,
-                                labelAlign: 'left',
-                                labelStyle: 'text-align:left;border solid 1px white;',
-                                labelSeparator: '',
-                                labelClsExtra: 'some-class',
-                                fieldStyle: 'text-align: left;font-size: 12px;',
-                                autoScroll: true
-                            }, {
-                                xtype: 'textfield',
-                                id: 'userInputFormBuyPriceField',
-                                name: 'BuyingPrice',
-                                fieldLabel: 'Buying Prcie',
-                                filedAlign: 'top',
-                                editable: false,
-                                width: 300,
-                                labelWidth: 90,
-                                labelAlign: 'left',
-                                labelStyle: 'text-align:left;border solid 1px white;',
-                                labelSeparator: '',
-                                labelClsExtra: 'some-class',
-                                fieldStyle: 'text-align: left;font-size: 12px;',
-                                autoScroll: true
-                            }
-                        ]
+                            }]
+                        }, {
+                            xtype: 'textfield',
+                            id: 'userInputFormFingerPrintIDField',
+                            name: 'item_name',
+                            fieldLabel: ' Item Name',
+                            filedAlign: 'top',
+                            width: 300,
+                            editable: false,
+                            labelWidth: 90,
+                            labelAlign: 'left',
+                            labelStyle: 'text-align:left;border solid 1px white;',
+                            labelSeparator: '',
+                            labelClsExtra: 'some-class',
+                            fieldStyle: 'text-align: left;font-size: 12px;',
+                            autoScroll: true
+                        }, {
+                            xtype: 'textfield',
+                            name: 'CurrentStock',
+                            id: 'userInputFormCurrentStockField',
+                            fieldLabel: 'Available Stock',
+                            filedAlign: 'top',
+                            editable: false,
+                            width: 300,
+                            labelWidth: 90,
+                            labelAlign: 'left',
+                            labelStyle: 'text-align:left;border solid 1px white;',
+                            labelSeparator: '',
+                            labelClsExtra: 'some-class',
+                            fieldStyle: 'text-align: left;font-size: 12px;',
+                            autoScroll: true
+                        }, {
+                            xtype: 'textfield',
+                            id: 'userInputFormBuyPriceField',
+                            name: 'BuyingPrice',
+                            fieldLabel: 'Buying Prcie',
+                            filedAlign: 'top',
+                            editable: false,
+                            width: 300,
+                            labelWidth: 90,
+                            labelAlign: 'left',
+                            labelStyle: 'text-align:left;border solid 1px white;',
+                            labelSeparator: '',
+                            labelClsExtra: 'some-class',
+                            fieldStyle: 'text-align: left;font-size: 12px;',
+                            autoScroll: true
+                        }]
                     }, {
                         border: false,
                         margin: '0 0 0 15',
@@ -591,18 +591,17 @@ function SalesProductFormWindow() {
                             align: 'stretch'
                         },
                         items: [{
-                            xtype: 'numberfield',
-                            name: 'sales_price',
-                            fieldLabel: 'Sale price',
+                            xtype: 'textfield',
+                            id: 'userInputFormSalesPriceField',
+                            name: 'SalesPrice',
+                            fieldLabel: 'Buying Prcie',
                             filedAlign: 'top',
-                            allowBlank: false,
+                            editable: false,
                             width: 300,
                             labelWidth: 80,
-                            minValue: 0,
                             labelAlign: 'left',
                             labelStyle: 'text-align:left;border solid 1px white;',
                             labelSeparator: '',
-                            emptyText: 'Give Sale price...',
                             labelClsExtra: 'some-class',
                             fieldStyle: 'text-align: left;font-size: 12px;',
                             autoScroll: true
@@ -639,6 +638,7 @@ function SalesProductFormWindow() {
                             width: 300,
                             labelWidth: 80,
                             minValue: 0,
+                            value: 0,
                             labelAlign: 'left',
                             labelStyle: 'text-align:left;border solid 1px white;',
                             labelSeparator: '',

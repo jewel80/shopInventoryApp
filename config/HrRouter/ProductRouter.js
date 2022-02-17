@@ -7,9 +7,7 @@ const pdf = require('html-pdf');
 const multer = require('multer');
 const xlsx = require('xlsx');
 const excel = require('exceljs');
-const {
-    setTimeout
-} = require('timers');
+const moment = require('moment');
 const upload = multer({
     dest: 'public/uploads/'
 });
@@ -111,10 +109,8 @@ function routerInit(app, dbFull) {
         }
 
         if (QUERY.from_date != null && QUERY.to_date != null) {
-            var f = new Date(QUERY.from_date);
-            var t = new Date(QUERY.to_date);
-            var f = (f.getFullYear()) + '-' + (f.getMonth() + 1) + '-' + f.getDate();
-            var t = (t.getFullYear()) + '-' + (t.getMonth() + 1) + '-' + t.getDate();
+            let f = moment(new Date(QUERY.from_date).toISOString());
+            let t = moment(new Date(QUERY.to_date).toISOString());
             SEARCH.in_date = {};
             SEARCH.in_date = {
                 [Op.between]: [f, t]
@@ -122,7 +118,6 @@ function routerInit(app, dbFull) {
 
         }
 
-        console.log(SEARCH)
         db.inv_product.findAndCountAll({
             where: SEARCH,
             include: [{
@@ -218,11 +213,10 @@ function routerInit(app, dbFull) {
 
     app.post('/CreateInvProduct', function(req, res) {
         var DATA = req.body;
-        console.log('==========A============')
-        console.log(DATA)
-        console.log('==========B============')
+        //New date create with format 
+        var f = new Date();
+        var newDate = (f.getFullYear()) + '-' + (f.getMonth() + 1) + '-' + f.getDate() + ' 00:00:00.0000000 +06:00';
         db.inv_product.create({
-            // serial: DATA.serial,
             product_type: DATA.product_type,
             item_name: DATA.item_name,
             item_code: DATA.item_code,
@@ -230,22 +224,16 @@ function routerInit(app, dbFull) {
             buying_quantity: DATA.buying_quantity,
             selling_price: DATA.selling_price,
             sold_quantity: DATA.sold_quantity,
-            // remaining: DATA.remaining,
             discount: DATA.discount,
-            in_date: new Date(),
-            remark: DATA.remark,
-
-            // date: new Date(),
+            in_date: newDate,
+            remark: DATA.remark
         }).then(cB => {
-            // console.log(cB);
             res.send('Success');
         }).catch(e => {
             console.log(e);
             res.send('Error');
         })
     });
-
-
 
     app.get('/getProductTypeList', function(req, res) {
         res.setHeader('Content-Type', 'application/json');
@@ -256,9 +244,7 @@ function routerInit(app, dbFull) {
         })
     });
 
-
-
-    ///////==============////////===================///////////
+    //==============////////===================//
     app.post('/XlUploadDuplicateRemove', upload.single('duplicate_data'), function(req, res) {
         var rawFile = req.file.path;
         var workbook = xlsx.readFile(rawFile, {
