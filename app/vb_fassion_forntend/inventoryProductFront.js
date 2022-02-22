@@ -277,7 +277,7 @@ function inventoryProductGrid(UN) {
                 return '<b><big>৳' + value.formatMoney(2, '.', ',') + '</big></b> ';
             },
             renderer: function(value, meta, record, rowIdx, colIdx, store, view) {
-                 meta.style = "background-color: #F0FFF0";
+                 meta.style = "background-color: rgb(155 140 167)";
                 return value.formatMoney(2, '.', ',');
             },
         }, {
@@ -293,7 +293,7 @@ function inventoryProductGrid(UN) {
                 }
             },
             renderer: function(value, meta) {
-                meta.css = 'light-yellow-column';
+                meta.style = "background-color: rgb(150 192 193)";
                 return value;
             },
             summaryType: 'sum',
@@ -317,7 +317,7 @@ function inventoryProductGrid(UN) {
                 return '<b><big>৳' + value.formatMoney(2, '.', ',') + '</big></b> ';
             },
             renderer: function(value, meta, record, rowIdx, colIdx, store, view) {
-                meta.css = 'light-red-column';
+                meta.style = "background-color: #dbdb9f";
                 return value.formatMoney(2, '.', ',');
             },
         }, {
@@ -334,7 +334,7 @@ function inventoryProductGrid(UN) {
             // },
 
             renderer: function(value, meta) {
-                meta.css = 'light-orange-column';
+                meta.style = "background-color: rgb(190 204 219)";
                 return value;
             },
             summaryType: 'sum',
@@ -356,7 +356,7 @@ function inventoryProductGrid(UN) {
             renderer: function(value, meta, recordX, rowIndex, colIndex, store, view) {
                 var value = (recordX.data.buying_quantity - recordX.data.sold_quantity);
                 // meta.css = 'light-blue-column';
-                meta.style = "background-color: #B0E0E6";
+                meta.style = "background-color: #9196c1c2";
                 return value;
             },
         }, {

@@ -10,6 +10,7 @@ function mainRouter(app, db, io) {
     
     const ProductRouter = require(__dirname + '/HrRouter/ProductRouter.js')
     const SalesRouter = require(__dirname + '/HrRouter/SalesRouter.js')
+    const SummeryRouter = require(__dirname + '/HrRouter/SummeryRouter.js')
 
 
 
@@ -18,6 +19,7 @@ function mainRouter(app, db, io) {
     navigationRouter.routerInit(app, db)
     ProductRouter.routerInit(app, db)
     SalesRouter.routerInit(app, db)
+    SummeryRouter.routerInit(app, db)
 
 
     io.on('connection', function(s) {

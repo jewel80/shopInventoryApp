@@ -129,9 +129,12 @@ function nagadNavigation(user) {
 
                     case "Inventory Product":
                         inventoryProductTab(r.data.menuData);
-                        break;
+                        break; 
                     case "Sales Product":
                         SalesProductTab(r.data.menuData);
+                        break;
+                    case "Summery Report":
+                        SummeryReportTab(r.data.menuData);
                         break;
                 }
             }

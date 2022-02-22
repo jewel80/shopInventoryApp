@@ -36,7 +36,10 @@ module.exports = function(sequelize) {
         },
         remark: {
             type: Sequelize.STRING,
-        }
+        },
+        memo_e_n: {
+            type: Sequelize.STRING,
+        },
     }, {
         tableName: 'sales',
         // underscored: true,

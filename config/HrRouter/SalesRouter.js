@@ -52,12 +52,15 @@ function routerInit(app, dbFull) {
             };
 
         }
-        
+
         db.sales.findAndCountAll({
             where: SEARCH,
             include: [{
                 model: db.inv_product,
             }],
+            order: [
+                ['date', 'DESC']
+            ],
             offset: (QUERY.start) ? parseInt(QUERY.start) : 0,
             limit: (QUERY.limit) ? parseInt(QUERY.limit) : null
         }).then(rData => {
@@ -135,13 +138,14 @@ function routerInit(app, dbFull) {
         //New date create with format 
         var f = new Date();
         var newDate = (f.getFullYear()) + '-' + (f.getMonth() + 1) + '-' + f.getDate() + ' 00:00:00.0000000 +06:00';
-        var totalPrice = (DATA.sales_price * DATA.quantity) - DATA.discount;
+        var totalPrice = (parseInt(DATA.SalesPrice) * parseInt(DATA.quantity)) - parseInt(DATA.discount);
         db.sales.create({
             products: DATA.product_item_code,
             item_name: DATA.item_name,
             item_code: DATA.ItemCode,
             sales_price: DATA.SalesPrice,
             quantity: DATA.quantity,
+            memo_e_n: DATA.memo_en,
             discount: DATA.discount,
             total_price: totalPrice,
             date: DATA.date ? DATA.date : newDate,
@@ -165,12 +169,14 @@ function routerInit(app, dbFull) {
                 }).then(cB => {
                     res.send('Success');
                 }).catch(e => {
+
                     res.send('Error');
                 })
             }).catch(e => {
                 res.send('Error');
             })
         }).catch(e => {
+            console.log(e);
             res.send('Error');
         })
     });

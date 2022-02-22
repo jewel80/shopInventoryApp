@@ -210,10 +210,20 @@ function salesProductGrid(UN) {
                 }
             },
         }, {
+            header: 'MEMO E.N',
+            dataIndex: 'memo_e_n',
+            align: 'left',
+            editor: 'textfield',
+            width: 130,
+            renderer: function(value, meta) {
+                meta.style = "background-color: rgb(207 181 206)";
+                return value;
+            },
+        }, {
             header: 'ITEM NAME',
             dataIndex: 'item_name',
             align: 'left',
-            flex: .4,
+            width: 150,
         }, {
             header: 'PRODUCT ITEM CODE',
             dataIndex: 'inv_item_code',
@@ -236,7 +246,7 @@ function salesProductGrid(UN) {
                 }
             },
             renderer: function(value, meta) {
-                meta.style = "background-color: rgb(210 245 233)";
+                meta.style = "background-color: rgb(155 140 167)";
                 return value;
             },
             summaryType: 'sum',
@@ -260,7 +270,7 @@ function salesProductGrid(UN) {
                 return '<b><big>৳' + value.formatMoney(2, '.', ',') + '</big></b> ';
             },
             renderer: function(value, meta, record, rowIdx, colIdx, store, view) {
-                meta.css = 'light-orange-column';
+                meta.style = "background-color: rgb(150 192 193)";
                 return value.formatMoney(2, '.', ',');
             },
         }, {
@@ -276,7 +286,7 @@ function salesProductGrid(UN) {
                 }
             },
             renderer: function(value, meta) {
-                meta.css = 'light-yellow-column';
+                meta.style = "background-color: #dbdb9f";
                 return value;
             },
             // renderer: function(value, meta) {
@@ -304,7 +314,7 @@ function salesProductGrid(UN) {
                 return '<b><big>৳' + value.formatMoney(2, '.', ',') + '</big></b> ';
             },
             renderer: function(value, meta, record, rowIdx, colIdx, store, view) {
-                meta.css = 'light-red-column';
+                meta.style = "background-color: rgb(203 217 156)";
                 return value.formatMoney(2, '.', ',');
             },
         }, {
@@ -312,7 +322,7 @@ function salesProductGrid(UN) {
             dataIndex: 'remark',
             align: 'left',
             editor: 'textfield',
-            flex: .4,
+            width: 180,
             listeners: {
                 beforerender: function(self, eOpts) {
                     if (UN.role < 2)
@@ -581,6 +591,21 @@ function SalesProductFormWindow() {
                             labelClsExtra: 'some-class',
                             fieldStyle: 'text-align: left;font-size: 12px;',
                             autoScroll: true
+                        }, {
+                            xtype: 'textfield',
+                            id: 'userInputFormSalesPriceField',
+                            name: 'SalesPrice',
+                            fieldLabel: 'Buying Prcie',
+                            filedAlign: 'top',
+                            editable: false,
+                            width: 300,
+                            labelWidth: 90,
+                            labelAlign: 'left',
+                            labelStyle: 'text-align:left;border solid 1px white;',
+                            labelSeparator: '',
+                            labelClsExtra: 'some-class',
+                            fieldStyle: 'text-align: left;font-size: 12px;',
+                            autoScroll: true
                         }]
                     }, {
                         border: false,
@@ -591,21 +616,6 @@ function SalesProductFormWindow() {
                             align: 'stretch'
                         },
                         items: [{
-                            xtype: 'textfield',
-                            id: 'userInputFormSalesPriceField',
-                            name: 'SalesPrice',
-                            fieldLabel: 'Buying Prcie',
-                            filedAlign: 'top',
-                            editable: false,
-                            width: 300,
-                            labelWidth: 80,
-                            labelAlign: 'left',
-                            labelStyle: 'text-align:left;border solid 1px white;',
-                            labelSeparator: '',
-                            labelClsExtra: 'some-class',
-                            fieldStyle: 'text-align: left;font-size: 12px;',
-                            autoScroll: true
-                        }, {
                             xtype: 'numberfield',
                             name: 'quantity',
                             fieldLabel: 'Sale Qty.',
@@ -629,6 +639,21 @@ function SalesProductFormWindow() {
                                     return "The product Qty is not available in stores.";
                                 }
                             }
+                        }, {
+                            xtype: 'textfield',
+                            name: 'memo_en',
+                            fieldLabel: 'Memo E.N',
+                            filedAlign: 'top',
+                            allowBlank: false,
+                            width: 300,
+                            labelWidth: 80,
+                            labelAlign: 'left',
+                            labelStyle: 'text-align:left;border solid 1px white;',
+                            labelSeparator: '',
+                            emptyText: 'Give Memo E.N...',
+                            labelClsExtra: 'some-class',
+                            fieldStyle: 'text-align: left;font-size: 12px;',
+                            autoScroll: true
                         }, {
                             xtype: 'numberfield',
                             name: 'discount',

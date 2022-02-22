@@ -123,6 +123,9 @@ function routerInit(app, dbFull) {
             include: [{
                 model: db.product_type,
             }],
+            order: [
+                ['in_date', 'DESC']
+            ],
             offset: (QUERY.start) ? parseInt(QUERY.start) : 0,
             limit: (QUERY.limit) ? parseInt(QUERY.limit) : null
         }).then(rData => {
