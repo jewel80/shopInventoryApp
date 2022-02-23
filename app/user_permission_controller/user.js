@@ -17,7 +17,7 @@ function userTab(UN) {
                 tooltip: 'Add New',
                 border: 1,
                 style: {
-                    borderColor: 'blue',
+                    borderColor: 'green',
                     borderStyle: 'solid'
                 },
                 hidden: (UN.role > 2) ? false : true,
@@ -34,7 +34,7 @@ function userTab(UN) {
                 tooltip: 'Reload',
                 border: 1,
                 style: {
-                    borderColor: 'blue',
+                    borderColor: 'green',
                     borderStyle: 'solid'
                 },
                 handler: function() {

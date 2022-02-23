@@ -133,6 +133,10 @@ function nagadNavigation(user) {
                     case "Sales Product":
                         SalesProductTab(r.data.menuData);
                         break;
+                    case "Expence List":
+                        ExpenceListTab(r.data.menuData);
+                        break;
+
                     case "Summery Report":
                         SummeryReportTab(r.data.menuData);
                         break;

@@ -183,7 +183,7 @@ function inventoryProductGrid(UN) {
             tooltip: 'Clear The Search Boxes',
             border: 1,
             style: {
-                borderColor: 'blue',
+                borderColor: 'green',
                 borderStyle: 'solid'
             },
             handler: function() {
@@ -201,7 +201,7 @@ function inventoryProductGrid(UN) {
             hidden: (UN.role < 2) ? true : false,
             border: 1,
             style: {
-                borderColor: 'blue',
+                borderColor: 'green',
                 borderStyle: 'solid'
             },
             handler: function() {
@@ -212,7 +212,7 @@ function inventoryProductGrid(UN) {
             icon: '/public/icons/refresh.png',
             tooltip: 'Reload',
             style: {
-                borderColor: 'blue',
+                borderColor: 'green',
                 borderStyle: 'solid'
             },
             handler: function() {
