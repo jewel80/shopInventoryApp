@@ -73,10 +73,11 @@ function routerInit(app, dbFull) {
 
     app.post('/CreateExpence', function(req, res) {
         var DATA = req.body;
+        console.log(DATA);
         db.expence.create({
             expence_money: DATA.expence_money,
             date: DATA.date,
-            remark: DATA.remark
+            remark: DATA.remarks
         }).then(cB => {
             res.send('Success');
         }).catch(e => {

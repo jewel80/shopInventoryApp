@@ -43,7 +43,7 @@ var navigation_panel = Ext.create('Ext.panel.Panel', {
         name: 'sign_out',
         tooltip: 'Home Page',
         handler: function() {
-            window.location.href = site_url ;
+            window.location.href = site_url;
         }
     }],
     icon: '/public/images/orogonic_logo.png',
@@ -129,7 +129,7 @@ function nagadNavigation(user) {
 
                     case "Inventory Product":
                         inventoryProductTab(r.data.menuData);
-                        break; 
+                        break;
                     case "Sales Product":
                         SalesProductTab(r.data.menuData);
                         break;
@@ -137,8 +137,11 @@ function nagadNavigation(user) {
                         ExpenceListTab(r.data.menuData);
                         break;
 
-                    case "Summery Report":
+                    case "Sales Report":
                         SummeryReportTab(r.data.menuData);
+                        break;
+                    case "Account Summery":
+                        AccountSummeryTab(r.data.menuData);
                         break;
                 }
             }

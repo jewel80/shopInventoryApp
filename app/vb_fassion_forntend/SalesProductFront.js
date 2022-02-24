@@ -216,7 +216,8 @@ function salesProductGrid(UN) {
             editor: 'textfield',
             width: 130,
             renderer: function(value, meta) {
-                meta.style = "background-color: rgb(207 181 206)";
+                meta.style = "background-color: #c9dee7";
+                // meta.style = "background-color: rgb(207 181 206)";
                 return value;
             },
         }, {
@@ -246,7 +247,8 @@ function salesProductGrid(UN) {
                 }
             },
             renderer: function(value, meta) {
-                meta.style = "background-color: rgb(155 140 167)";
+                meta.style = "background-color: #c9dee7";
+                // meta.style = "background-color: rgb(155 140 167)";
                 return value;
             },
             summaryType: 'sum',
@@ -270,7 +272,8 @@ function salesProductGrid(UN) {
                 return '<b><big>৳' + value.formatMoney(2, '.', ',') + '</big></b> ';
             },
             renderer: function(value, meta, record, rowIdx, colIdx, store, view) {
-                meta.style = "background-color: rgb(150 192 193)";
+                // meta.style = "background-color: rgb(150 192 193)";
+                meta.style = "background-color: #c9dee7";
                 return value.formatMoney(2, '.', ',');
             },
         }, {
@@ -286,7 +289,8 @@ function salesProductGrid(UN) {
                 }
             },
             renderer: function(value, meta) {
-                meta.style = "background-color: #dbdb9f";
+                // meta.style = "background-color: #dbdb9f";
+                meta.style = "background-color: #c9dee7";
                 return value;
             },
             // renderer: function(value, meta) {
@@ -314,7 +318,8 @@ function salesProductGrid(UN) {
                 return '<b><big>৳' + value.formatMoney(2, '.', ',') + '</big></b> ';
             },
             renderer: function(value, meta, record, rowIdx, colIdx, store, view) {
-                meta.style = "background-color: rgb(203 217 156)";
+                // meta.style = "background-color: rgb(203 217 156)";
+                meta.style = "background-color: #c9dee7";
                 return value.formatMoney(2, '.', ',');
             },
         }, {

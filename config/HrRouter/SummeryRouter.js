@@ -27,37 +27,28 @@ function routerInit(app, dbFull) {
 
         var QUERY = (req.query) ? req.query : {};
         var SEARCH = {};
+        var D_SEARCH = {};
 
-        if (QUERY.item_name) {
-            SEARCH = {
-                item_name: {
-                    [Op.like]: '%' + QUERY.item_name + '%'
-                }
-            };
-        }
-
-        if (QUERY.item_code) {
-            SEARCH = {
-                item_code: {
-                    [Op.like]: '%' + QUERY.item_code + '%'
-                }
-            };
-        }
+        if (QUERY.product_type)
+            SEARCH.product_type = QUERY.product_type;
 
         if (QUERY.from_date != null && QUERY.to_date != null) {
             let f = moment(new Date(QUERY.from_date).toISOString());
             let t = moment(new Date(QUERY.to_date).toISOString());
-            SEARCH.date = {};
-            SEARCH.date = {
+            D_SEARCH.date = {};
+            D_SEARCH.date = {
                 [Op.between]: [f, t]
             };
 
         }
-
         db.sales.findAndCountAll({
-            where: SEARCH,
+            where: D_SEARCH,
             include: [{
                 model: db.inv_product,
+                where: SEARCH,
+                include: [{
+                    model: db.product_type
+                }]
             }],
             order: [
                 ['date', 'DESC']

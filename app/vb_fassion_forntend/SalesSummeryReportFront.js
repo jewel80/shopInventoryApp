@@ -3,7 +3,7 @@ function SummeryReportTab(UN) {
         tab_panel.setActiveTab(Ext.getCmp("summery_report"));
     } else {
         var new_tab = tab_panel.add({
-            title: 'Summery Report',
+            title: 'Sales Report',
             layout: 'fit',
             closable: true,
             id: 'summery_report',
@@ -93,128 +93,115 @@ function SummerReportGrid(UN) {
             ftype: 'summary',
             dock: 'bottom'
         }],
-        tbar: [Ext.create('Ext.form.field.Text', {
-                name: 'item_name',
-                id: 'summery_item_name_search',
-                emptyText: 'Search By Item Name...',
-                padding: 5,
-                border: 2,
-                style: {
-                    borderColor: 'green',
-                    borderStyle: 'solid'
-                },
-                listeners: {
-                    change: {
-                        fn: function(field, value) {
-                            summery_report_grid.paramsReload({
-                                item_name: value
-                            });
-                        }
-                    }
-                }
-            }), Ext.create('Ext.form.field.Text', {
-                name: 'item_code',
-                id: 'summery_item_code_search',
-                emptyText: 'Search By Item Code...',
-                padding: 5,
-                border: 2,
-                style: {
-                    borderColor: 'green',
-                    borderStyle: 'solid'
-                },
-                listeners: {
-                    change: {
-                        fn: function(field, value) {
-                            summery_report_grid.paramsReload({
-                                item_code: value
-                            });
-                        }
-                    }
-                }
-            }), Ext.create('Ext.form.field.Date', {
-                id: 'summery_start_date_search',
-                name: 'from_date',
-                padding: 5,
-                border: 2,
-                style: {
-                    borderColor: 'green',
-                    borderStyle: 'solid'
-                },
-                emptyText: 'Select From Date...',
-                listeners: {
-                    change: {
-                        fn: function(combo, value) {
-                            summery_report_grid.paramsReload({
-                                from_date: value
-                            });
-                        }
-                    }
-                }
-            }), Ext.create('Ext.form.field.Date', {
-                id: 'summery_end_date_search',
-                name: 'to_date',
-                padding: 5,
-                border: 2,
-                style: {
-                    borderColor: 'green',
-                    borderStyle: 'solid'
-                },
-                emptyText: 'Select To Date...',
-                listeners: {
-                    change: {
-                        fn: function(combo, value) {
-                            summery_report_grid.paramsReload({
-                                to_date: value
-                            });
-                        }
-                    }
-                }
-            }), {
-                xtype: 'button',
-                icon: '/public/icons/clear.png',
-                tooltip: 'Clear The Search Boxes',
-                border: 1,
-                style: {
-                    borderColor: 'green',
-                    borderStyle: 'solid'
-                },
-                handler: function() {
-                    Ext.getCmp('summery_start_date_search').setValue(undefined);
-                    Ext.getCmp('summery_end_date_search').setValue(undefined);
-                    Ext.getCmp('summery_item_name_search').setValue(undefined);
-                    Ext.getCmp('summery_item_code_search').setValue(undefined);
-                    Ext.getCmp('summery_report_grid').getStore().load();
-                }
-            },
+        tbar: [Ext.create('Ext.form.field.ComboBox', {
+            name: 'product_type',
+            id: 'summery_product_type_search',
+            editable: false,
+            emptyText: 'Search By Product Type...',
+            queryMode: 'local',
+            displayField: 'name',
+            valueField: 'id',
 
-            {
-                xtype: 'button',
-                icon: '/public/icons/create.png',
-                tooltip: 'Add New Sales Product',
-                hidden: (UN.role < 2) ? true : false,
-                border: 1,
-                style: {
-                    borderColor: 'green',
-                    borderStyle: 'solid'
-                },
-                handler: function() {
-                    SalesProductFormWindow();
-                }
-            }, {
-                xtype: 'button',
-                icon: '/public/icons/refresh.png',
-                tooltip: 'Reload',
-                style: {
-                    borderColor: 'green',
-                    borderStyle: 'solid'
-                },
-                handler: function() {
-                    Ext.getCmp('summery_report_grid').paramsReload();
-                }
+            width: 220,
+            editable: true,
+            anyMatch: true,
+            typeAhead: true,
+            transform: 'stateSelect',
+            forceSelection: true,
+
+            padding: 5,
+            style: {
+                borderColor: 'green',
+                borderStyle: 'solid'
             },
-            gridPaging
-        ],
-        // }, gridPaging],
+            store: {
+                fields: ['id', 'name'],
+                pageSize: 0,
+                limit: 0,
+                proxy: {
+                    type: 'ajax',
+                    url: '/getProductTypeList',
+                    reader: {
+                        root: 'rows'
+                    }
+                },
+                autoLoad: true,
+                autoSync: true
+            },
+            listeners: {
+                change: {
+                    fn: function(field, value) {
+                        summery_report_grid.paramsReload({
+                            product_type: value
+                        });
+                    }
+                }
+            }
+        }), Ext.create('Ext.form.field.Date', {
+            id: 'summery_start_date_search',
+            name: 'from_date',
+            padding: 5,
+            border: 2,
+            style: {
+                borderColor: 'green',
+                borderStyle: 'solid'
+            },
+            emptyText: 'Select From Date...',
+            listeners: {
+                change: {
+                    fn: function(combo, value) {
+                        summery_report_grid.paramsReload({
+                            from_date: value
+                        });
+                    }
+                }
+            }
+        }), Ext.create('Ext.form.field.Date', {
+            id: 'summery_end_date_search',
+            name: 'to_date',
+            padding: 5,
+            border: 2,
+            style: {
+                borderColor: 'green',
+                borderStyle: 'solid'
+            },
+            emptyText: 'Select To Date...',
+            listeners: {
+                change: {
+                    fn: function(combo, value) {
+                        summery_report_grid.paramsReload({
+                            to_date: value
+                        });
+                    }
+                }
+            }
+        }), {
+            xtype: 'button',
+            icon: '/public/icons/clear.png',
+            tooltip: 'Clear The Search Boxes',
+            border: 1,
+            style: {
+                borderColor: 'green',
+                borderStyle: 'solid'
+            },
+            handler: function() {
+                Ext.getCmp('summery_product_type_search').setValue(undefined);
+                Ext.getCmp('summery_start_date_search').setValue(undefined);
+                Ext.getCmp('summery_end_date_search').setValue(undefined);
+                Ext.getCmp('summery_report_grid').getStore().load();
+            }
+        }, {
+            xtype: 'button',
+            icon: '/public/icons/refresh.png',
+            tooltip: 'Reload',
+            style: {
+                borderColor: 'green',
+                borderStyle: 'solid'
+            },
+            handler: function() {
+                Ext.getCmp('summery_report_grid').paramsReload();
+            }
+        }, gridPaging],
         columns: [Ext.create('Ext.grid.RowNumberer', {
             width: 50,
         }), {
@@ -230,7 +217,8 @@ function SummerReportGrid(UN) {
             align: 'left',
             width: 130,
             renderer: function(value, meta) {
-                meta.style = "background-color: rgb(207 181 206)";
+                // meta.style = "background-color: rgb(207 181 206)";
+                meta.style = "background-color: #c9dee7";
                 return value;
             },
         }, {
@@ -249,7 +237,8 @@ function SummerReportGrid(UN) {
             align: 'right',
             width: 130,
             renderer: function(value, meta) {
-                meta.style = "background-color: rgb(155 140 167)";
+                // meta.style = "background-color: rgb(155 140 167)";
+                meta.style = "background-color: #c9dee7";
                 return value;
             },
             summaryType: 'sum',
@@ -266,7 +255,8 @@ function SummerReportGrid(UN) {
                 return '<b><big>৳' + value.formatMoney(2, '.', ',') + '</big></b> ';
             },
             renderer: function(value, meta, record, rowIdx, colIdx, store, view) {
-                meta.style = "background-color: rgb(150 192 193)";
+                // meta.style = "background-color: rgb(150 192 193)";
+                meta.style = "background-color: #c9dee7";
                 return value.formatMoney(2, '.', ',');
             },
         }, {
@@ -275,7 +265,8 @@ function SummerReportGrid(UN) {
             align: 'right',
             width: 110,
             renderer: function(value, meta) {
-                meta.style = "background-color: #dbdb9f";
+                // meta.style = "background-color: #dbdb9f";
+                meta.style = "background-color: #c9dee7";
                 return value;
             }
         }, {
@@ -288,7 +279,8 @@ function SummerReportGrid(UN) {
                 return '<b><big>৳' + value.formatMoney(2, '.', ',') + '</big></b> ';
             },
             renderer: function(value, meta, record, rowIdx, colIdx, store, view) {
-                meta.style = "background-color: rgb(203 217 156)";
+                // meta.style = "background-color: rgb(203 217 156)";
+                meta.style = "background-color: #c9dee7";
                 return value.formatMoney(2, '.', ',');
             },
         }, {
@@ -312,7 +304,8 @@ function SummerReportGrid(UN) {
                 var buyCost = (parseInt(recordX.data.buying_price) * parseInt(recordX.data.quantity));
                 var salesPrice = parseInt(recordX.data.total_price);
                 var value = salesPrice - buyCost;
-                meta.style = "background-color: rgb(190 204 219)";
+                // meta.style = "background-color: rgb(190 204 219)";
+                meta.style = "background-color: #c9dee7";
                 return value.formatMoney(2, '.', ',');
             },
         }, {

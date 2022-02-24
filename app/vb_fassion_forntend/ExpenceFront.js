@@ -174,7 +174,8 @@ function ExpenceListGrid(UN) {
                 return '<b><big>৳' + value.formatMoney(2, '.', ',') + '</big></b> ';
             },
             renderer: function(value, meta, record, rowIdx, colIdx, store, view) {
-                meta.style = "background-color: rgb(155 140 167)";
+                // meta.style = "background-color: rgb(155 140 167)";
+                meta.style = "background-color: #c9dee7";
                 return value.formatMoney(2, '.', ',');
             },
         }, {
