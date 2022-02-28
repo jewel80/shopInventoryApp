@@ -51,7 +51,6 @@ function routerInit(app, dbFull) {
         }).then(rData => {
             res.send(rData);
         }).catch(err => {
-            console.log(err)
             res.send([]);
         })
     });
