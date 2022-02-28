@@ -201,6 +201,35 @@ function SummerReportGrid(UN) {
             handler: function() {
                 Ext.getCmp('summery_report_grid').paramsReload();
             }
+        }, {
+            xtype: 'button',
+            icon: '/public/icons/excel.png',
+            hidden: (UN.role < 2) ? true : false,
+            tooltip: 'Download As EXCEL',
+            border: 1,
+            style: {
+                borderColor: 'green',
+                borderStyle: 'solid'
+            },
+            handler: function() {
+                if (Ext.getCmp('summery_report_grid')) {
+                    var param = Ext.getCmp('summery_report_grid').getStore().lastOptions.params;
+                    tab_panel.setLoading(true);
+                    Ext.Ajax.request({
+                        url: '/DownloadSalesSummeryReportExcel',
+                        method: 'POST',
+                        params: param,
+                        success: function(response, option) {
+                            Ext.MessageBox.alert('success', 'Click Here  <a href = "/public/excel/DownloadSalesSummeryReportExcel.xlsx" target="_blank"> View Excel sheet</a>');
+                            tab_panel.setLoading(false);
+                        },
+                        failure: function(response, option) {},
+                        warning: function(response, option) {
+                            Ext.MessageBox.alert('waring ', 'There is no data aviable');
+                        },
+                    });
+                }
+            }
         }, gridPaging],
         columns: [Ext.create('Ext.grid.RowNumberer', {
             width: 50,

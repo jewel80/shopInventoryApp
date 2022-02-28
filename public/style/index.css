@@ -220,3 +220,7 @@
 .row-child .x-grid-row-selected .x-grid-cell {
     background-color: #ff0 !important;
 }
+
+.element.style {
+    padding: 38px;
+}

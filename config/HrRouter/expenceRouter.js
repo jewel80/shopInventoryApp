@@ -41,9 +41,6 @@ function routerInit(app, dbFull) {
     });
 
 
-
-
-
     app.post('/getExpenceList', function(req, res) {
         var QUERY = {};
         QUERY.id = req.body.id;

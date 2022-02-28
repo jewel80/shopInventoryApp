@@ -167,7 +167,7 @@ function ExpenceListGrid(UN) {
             header: 'EXPENCE COST',
             dataIndex: 'expence_money',
             align: 'right',
-            editor: 'textfield',
+            editor: 'numberfield',
             flex: .5,
             summaryType: 'sum',
             summaryRenderer: function(value, summaryData, dataIndex) {
